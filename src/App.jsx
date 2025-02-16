@@ -93,7 +93,7 @@ const Home = () => {
           className="homepageavtar"
           style={{ maxWidth: "100%" }}
           alt="coder"
-          src="../public/avatar.png"
+          src="/../public/avatar.png"
         />
       </motion.div>
     </motion.div>
