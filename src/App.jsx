@@ -13,6 +13,7 @@ import "antd/dist/reset.css";
 // import Nav from "./pages/nav";
 import { MenuOutlined } from "@ant-design/icons";
 import { Drawer } from "antd";
+import avatar from '../public/avatar.png'
 
 
 const { Header, Content, Footer } = Layout;
@@ -93,7 +94,7 @@ const Home = () => {
           className="homepageavtar"
           style={{ maxWidth: "100%" }}
           alt="coder"
-          src="/../public/avatar.png"
+          src={avatar}
         />
       </motion.div>
     </motion.div>
