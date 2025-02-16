@@ -7,4 +7,9 @@ export default defineConfig({
   optimizeDeps: {
     include: ['antd'],
   },
+  build: {
+    rollupOptions: {
+      external: ["@swc/core"],
+    },
+  },
 });
