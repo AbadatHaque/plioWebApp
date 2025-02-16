@@ -1,0 +1,113 @@
+
+.containar{
+    display: flex;
+    font-size: 1.5rem;
+    text-align: left;
+    align-items:center;
+    margin: 0px 3rem;
+}
+/* // LHS */
+.containar .lhs{
+    min-width: 50%;
+   
+}
+.containar .lhs .headingTex{
+    margin: 0px 0px 2rem;
+}
+.containar .lhs .socialMediaButtons{
+    display: flex;
+    justify-content:left;
+    gap:2rem
+}
+.containar .lhs .socialMediaButtons button{
+    border: none;
+}
+.containar .lhs .socialMediaButtons button svg{
+    font-size: 2rem;
+    background-color: white;
+    cursor: pointer;
+}
+.lhs #viewResume{
+    margin: .6rem 0px 0px ;
+    padding: .5rem 1rem;
+    border-radius: .5rem;
+    font-weight: bold;
+    border: .2rem solid palevioletred;
+    cursor: pointer;
+    font-size: 1.3rem;
+}
+
+/* // About */
+.ant-card{
+padding: 0px  !important;
+/* padding: 20px !important; */
+}
+.ant-card-body{
+    /* padding: 0px !important; */
+
+}
+
+@media screen and (max-width: 768px) {
+    .desktop-menu {
+      display: none !important;
+    }
+  
+    .mobile-menu-button {
+      display: block !important;
+    }
+  }
+  
+
+@media screen and (max-width: 768px) {
+    .containar {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        margin: 0 1rem;
+    }
+
+    .containar .lhs, .containar .rhs {
+        min-width: 100%;
+    }
+
+    .containar .lhs .socialMediaButtons {
+        justify-content: center;
+        gap: 1rem;
+    }
+
+    .lhs #viewResume {
+        font-size: 1rem;
+        padding: 0.4rem 0.8rem;
+    }
+
+    .ant-card {
+        width: 100%;
+    }
+
+    .ant-menu {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    /* .ant-menu-item {
+        padding: 10px 20px !important;
+    } */
+
+    .ant-avatar {
+        width: 120px !important;
+        height: 120px !important;
+    }
+
+    .ant-btn {
+        font-size: 14px !important;
+        padding: 8px 16px !important;
+    }
+
+    .details h1 {
+        font-size: 28px !important;
+    }
+
+    .details p {
+        font-size: 14px !important;
+    }
+}
