@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect  } from "react";
-import { Layout, Menu, Button, Card,Grid , Form, Input, Avatar,Timeline, Col, Row,message  } from "antd";
+import { Layout, Menu, Button, Card,Grid , Form, Input, Avatar,Timeline, Col, Row,message,Switch,Modal   } from "antd";
 import { motion } from "framer-motion";
 import { UserOutlined, MailOutlined, MessageOutlined } from "@ant-design/icons";
 import "antd/dist/reset.css";
@@ -12,10 +12,24 @@ import emailjs from "emailjs-com";
 import "antd/dist/reset.css";
 // import Nav from "./pages/nav";
 import { MenuOutlined } from "@ant-design/icons";
-import { Drawer } from "antd";
-import avatar from '../public/avatar.png'
-import profile from '../public/static/profile.jpg';
-import game from '../public/game.png';
+import { Drawer,Typography } from "antd";
+import './app.css'
+import {
+  Html5Outlined,
+  CodeOutlined,
+  DatabaseOutlined,
+  ApiOutlined,
+  MobileOutlined,
+  GithubOutlined,
+  GitlabOutlined,
+  BranchesOutlined,
+  BugOutlined,
+  CloudOutlined,
+  FullscreenOutlined 
+} from "@ant-design/icons";
+const { Title } = Typography;
+
+
 
 const { Header, Content, Footer } = Layout;
 
@@ -95,7 +109,7 @@ const Home = () => {
           className="homepageavtar"
           style={{ maxWidth: "100%" }}
           alt="coder"
-          src={avatar}
+          src="../public/avatar.png"
         />
       </motion.div>
     </motion.div>
@@ -104,8 +118,8 @@ const Home = () => {
 
 
 const timelineVariants = {
-  hidden: { opacity: 0, y: 50 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.8 } },
+  hidden: { opacity: 0, y: 0,x:'-100%' },
+  visible: { opacity: 1, y: 0,x:0, transition: { duration: 0.8 } },
 };
 
 const imageVariants = {
@@ -114,7 +128,7 @@ const imageVariants = {
 };
 
 const textVariants = {
-  hidden: { opacity: 0, x: -50 },
+  hidden: { opacity: 0, x:'100%' },
   visible: { opacity: 1, x: 0, transition: { duration: 1, ease: "easeOut" } },
 };
 
@@ -185,7 +199,7 @@ const About = () => {
         {/* Profile & About Section */}
         <Col xs={24} md={12} style={{ textAlign: "center" }}>
           <motion.div initial="hidden" animate="visible" variants={imageVariants}>
-            <Avatar size={180} src={profile} style={{ marginBottom: "20px" }} />
+            <Avatar size={180} src="../../public/static/profile.jpeg" style={{ marginBottom: "20px" }} />
           </motion.div>
 
           <motion.div className="details" initial="hidden" animate="visible" variants={textVariants}>
@@ -215,9 +229,10 @@ const About = () => {
   );
 };
 
+
 const cardVariants = {
-  hidden: { opacity: 0, y: 50 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.8 } },
+  hidden: { opacity: 0, y: 50, x:50 },
+  visible: { opacity: 1, y: 0,x:0, transition: { duration: 0.8 } },
   hover: { 
     scale: 1.05, 
     transition: { duration: 0.3 },
@@ -225,31 +240,47 @@ const cardVariants = {
   },
 };
 
+
 const projects = [
   {
     name: "React Portfolio",
-    image: game,
-    url:'https://neon-lebkuchen-9e77bf.netlify.app/'
+    image: "../public/game.png",
+    url: "https://neon-lebkuchen-9e77bf.netlify.app/",
+    technologies: "React, Ant Design, Framer Motion",
+    challenges: "Ensuring smooth animations and optimizing performance."
   },
   {
     name: "Dynamic Dashboard",
     image: "/static/images/dynamic-dashboard.jpg",
-    url:'https://neon-lebkuchen-9e77bf.netlify.app/'
+    url: "https://neon-lebkuchen-9e77bf.netlify.app/",
+    technologies: "React, Redux, Chart.js",
+    challenges: "Managing state efficiently and rendering large data sets."
   },
   {
     name: "E-commerce Platform",
     image: "/static/images/ecommerce-platform.jpg",
-    url:'https://neon-lebkuchen-9e77bf.netlify.app/'
+    url: "https://neon-lebkuchen-9e77bf.netlify.app/",
+    technologies: "Next.js, Tailwind CSS, Stripe API",
+    challenges: "Handling secure payments and optimizing load speed."
   },
   {
     name: "AI Chatbot",
     image: "/static/images/ai-chatbot.jpg",
-    url:'https://neon-lebkuchen-9e77bf.netlify.app/'
-  },
+    url: "https://neon-lebkuchen-9e77bf.netlify.app/",
+    technologies: "React, OpenAI API, WebSockets",
+    challenges: "Implementing real-time responses and improving NLP accuracy."
+  }
 ];
 
-
 const ProjectsPage = () => {
+  const [modalVisible, setModalVisible] = useState(false);
+  const [selectedProject, setSelectedProject] = useState(null);
+
+  const showModal = (project) => {
+    setSelectedProject(project);
+    setModalVisible(true);
+  };
+
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -262,33 +293,82 @@ const ProjectsPage = () => {
         boxShadow: "0 8px 16px rgba(0,0,0,0.2)",
       }}
     >
-      <h2 style={{ fontSize: "32px", fontWeight: "bold", textAlign: "center", marginBottom: "30px" }}>My Projects</h2>
+      <h2 style={{ fontSize: "32px", fontWeight: "bold", textAlign: "center", marginBottom: "30px" }}>
+        My Projects
+      </h2>
       <Row gutter={[16, 16]} justify="center">
-  {projects.map((project, index) => (
-    <Col key={index} xs={24} sm={12} md={8} lg={6} xl={6}>
-            <motion.div initial="hidden" animate="visible" whileHover="hover" variants={cardVariants} style={{ borderRadius: "10px", overflow: "hidden" }}>
-            <a href={project.url} target="_blank" rel="noopener noreferrer" style={{ textDecoration: "none" }}>
-              <Card
-                title={project.name}
-                style={{
-                  boxShadow: "0 6px 12px rgba(0,0,0,0.2)",
-                  borderRadius: "10px",
-                  overflow: "hidden",
-                  textAlign: "center",
-                  transition: "background 0.3s ease-in-out"
-                }}
-                cover={<img src={project.image} alt={project.name} style={{ padding: "20px" }} />}
-              >
-                <p style={{ fontSize: "16px", lineHeight: "1.6" }}>This project showcases advanced features and high usability.</p>
-              </Card>
+        {projects.map((project, index) => (
+          <Col key={index} xs={24} sm={12} md={8} lg={6} xl={6}>
+            <motion.div
+              initial="hidden"
+              animate="visible"
+              whileHover="hover"
+              variants={cardVariants}
+              style={{ position: "relative", borderRadius: "10px", overflow: "hidden" }}
+            >
+              <a href={project.url} target="_blank" rel="noopener noreferrer" style={{ textDecoration: "none" }}>
+                <Card
+                  title={project.name}
+                  style={{
+                    boxShadow: "0 6px 12px rgba(0,0,0,0.2)",
+                    borderRadius: "10px",
+                    overflow: "hidden",
+                    textAlign: "center",
+                    transition: "background 0.3s ease-in-out",
+                  }}
+                  cover={<img src={project.image} alt={project.name} style={{ padding: "20px" }} />}
+                >
+                  <p style={{ fontSize: "16px", lineHeight: "1.6" }}>
+                    This project showcases advanced features and high usability.
+                  </p>
+                </Card>
               </a>
+              <Button
+                type="primary"
+                icon={<FullscreenOutlined />}
+                style={{
+                  position: "absolute",
+                  top: "10px",
+                  right: "10px",
+                  zIndex: 10,
+                }}
+                onClick={() => showModal(project)}
+              />
             </motion.div>
           </Col>
         ))}
       </Row>
+      <Modal
+        title={<span style={{ fontSize: "24px", fontWeight: "bold" }}>{selectedProject?.name}</span>}
+        open={modalVisible}
+        onCancel={() => setModalVisible(false)}
+        footer={null}
+        width={800}
+        style={{
+          top: "50px",
+          borderRadius: "16px",
+          boxShadow: "0 10px 20px rgba(0,0,0,0.3)",
+        }}
+      >
+        {selectedProject && (
+          <div style={{ padding: "20px" }}>
+            <img 
+              src={selectedProject.image} 
+              alt={selectedProject.name} 
+              style={{ width: "100%", borderRadius: "10px", marginBottom: "20px", boxShadow: "0 4px 8px rgba(0,0,0,0.1)" }}
+            />
+            <h3 style={{ fontSize: "20px", fontWeight: "bold", marginBottom: "10px" }}>Technologies Used:</h3>
+            <p style={{ fontSize: "16px", lineHeight: "1.5" }}>{selectedProject.technologies}</p>
+            <h3 style={{ fontSize: "20px", fontWeight: "bold", marginBottom: "10px" }}>Challenges Faced:</h3>
+            <p style={{ fontSize: "16px", lineHeight: "1.5" }}>{selectedProject.challenges}</p>
+          </div>
+        )}
+      </Modal>
     </motion.div>
-  )
-}
+  );
+};
+
+
 const ContactForm = () => {
   const [form] = Form.useForm(); // Create a form instance
   const handleSubmit = (values) => {
@@ -346,6 +426,103 @@ const ContactForm = () => {
   );
 };
 
+const skills = [
+  { name: "HTML & CSS", icon: <Html5Outlined />, color: "#e44d26", description: "Experienced in building responsive layouts with HTML5 and CSS3." },
+  { name: "JavaScript", icon: <CodeOutlined />, color: "#f7df1e", description: "Proficient in ES6+ features and asynchronous programming." },
+  { name: "React.js", icon: <CodeOutlined />, color: "#61dafb", description: "Skilled in building SPA with React and state management." },
+  { name: "Redux Toolkit", icon: <DatabaseOutlined />, color: "#764abc", description: "Experience managing state efficiently using Redux Toolkit." },
+  { name: "Next.js", icon: <ApiOutlined />, color: "#000", description: "Expertise in SSR, SSG, and API routes with Next.js." },
+  { name: "React Native", icon: <MobileOutlined />, color: "#00d8ff", description: "Experience in developing cross-platform mobile applications." },
+  { name: "Git", icon: <BranchesOutlined />, color: "#f34f29", description: "Version control and collaboration using Git." },
+  { name: "GitHub", icon: <GithubOutlined />, color: "#333", description: "Managing repositories, pull requests, and CI/CD workflows." },
+  { name: "Bitbucket", icon: <GitlabOutlined />, color: "#205081", description: "Experience in working with Bitbucket repositories." },
+  { name: "Jira", icon: <BugOutlined />, color: "#0052cc", description: "Project management and issue tracking with Jira." },
+  { name: "jQuery", icon: <CloudOutlined />, color: "#0769ad", description: "Experience in using jQuery for DOM manipulation." },
+  { name: "Ant Design", icon: <CodeOutlined />, color: "#1890ff", description: "UI framework expertise for building sleek interfaces." },
+];
+
+const SkillPage = () => {
+  const [modalVisible, setModalVisible] = useState(false);
+  const [selectedSkill, setSelectedSkill] = useState(null);
+
+  const showModal = (skill) => {
+    setSelectedSkill(skill);
+    setModalVisible(true);
+  };
+
+  return (
+    <>
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 1 }}
+      style={{ padding: "50px", textAlign: "center", background: "#f0f2f5" }}
+    >
+      <Title level={2}>My Skills</Title>
+      <Row gutter={[16, 16]} justify="center">
+        {skills.map((skill, index) => (
+          <Col key={index} xs={24} sm={12} md={8} lg={6}>
+            <motion.div
+              whileHover={{ scale: 1.1, rotate: 5 }}
+              whileTap={{ scale: 0.9, rotate: -5 }}
+              initial={{ opacity: 0, y: 50 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+            >
+              <Card
+                style={{ borderLeft: `5px solid ${skill.color}`, cursor: "pointer", position: "relative" }}
+                hoverable
+                onClick={() => showModal(skill)}
+              >
+                <motion.div
+                  initial={{ scale: 0.8 }}
+                  animate={{ scale: 1 }}
+                  transition={{ duration: 0.5 }}
+                  style={{ fontSize: "24px", color: skill.color }}
+                >
+                  {skill.icon}
+                </motion.div>
+                <Title level={4} style={{ marginTop: "10px" }}>{skill.name}</Title>
+                <motion.div
+                  className="description-box"
+                  initial={{ opacity: 0 }}
+                  whileHover={{ opacity: 1 }}
+                  transition={{ duration: 0.3 }}
+                  style={{
+                    position: "absolute",
+                    bottom: "10px",
+                    left: "50%",
+                    transform: "translateX(-50%)",
+                    background: "rgba(0, 0, 0, 0.7)",
+                    color: "#fff",
+                    padding: "5px 10px",
+                    borderRadius: "5px",
+                    width: "90%",
+                    textAlign: "center",
+                    opacity: 0,
+                  }}
+                >
+                  {skill.description}
+                </motion.div>
+              </Card>
+            </motion.div>
+          </Col>
+        ))}
+      </Row>
+      <Modal
+        title={selectedSkill?.name}
+        visible={modalVisible}
+        onCancel={() => setModalVisible(false)}
+        footer={null}
+      >
+        <p>{selectedSkill?.description}</p>
+      </Modal>
+    </motion.div>
+    </>
+  );
+};
+
+
 const App = () => {
   const [currentPage, setCurrentPage] = useState("home");
 
@@ -357,6 +534,8 @@ const App = () => {
         return <ProjectsPage />;
       case "contact":
         return <ContactForm />;
+        case "skill":
+          return <SkillPage />;
       default:
         return <Home />;
     }
@@ -432,7 +611,7 @@ const App = () => {
               gap: "30px",
             }}
           >
-            {["home", "about", "projects", "contact"].map((item) => (
+            {["home", "about", "projects", "contact", "skill"].map((item) => (
               <motion.div
                 key={item}
                 whileHover={{ scale: 1.2, background: "rgba(255, 255, 255, 0.1)", borderRadius: "8px", padding: "5px 15px" }}
@@ -470,7 +649,7 @@ const App = () => {
         {/* Mobile Drawer Menu */}
         <Drawer title="Menu" placement="right" onClose={toggleDrawer} open={isDrawerOpen}>
           <Menu theme="light" mode="vertical">
-            {["home", "about", "projects", "contact"].map((item) => (
+            {["home", "about", "projects", "contact", "skill"].map((item) => (
               
               <motion.div
               key={item}
