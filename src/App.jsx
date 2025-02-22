@@ -199,7 +199,7 @@ const About = () => {
         {/* Profile & About Section */}
         <Col xs={24} md={12} style={{ textAlign: "center" }}>
           <motion.div initial="hidden" animate="visible" variants={imageVariants}>
-            <Avatar size={180} src="/public/static/profile.jpeg" style={{ marginBottom: "20px" }} />
+            <Avatar size={180} src="static/profile.jpeg" style={{ marginBottom: "20px" }} />
           </motion.div>
 
           <motion.div className="details" initial="hidden" animate="visible" variants={textVariants}>
@@ -244,7 +244,7 @@ const cardVariants = {
 const projects = [
   {
     name: "React Portfolio",
-    image: "/public/game.png",
+    image: "game.png",
     url: "https://neon-lebkuchen-9e77bf.netlify.app/",
     technologies: "React, Ant Design, Framer Motion",
     challenges: "Ensuring smooth animations and optimizing performance."
