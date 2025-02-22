@@ -27,6 +27,7 @@ import {
   FullscreenOutlined 
 } from "@ant-design/icons";
 const { Title } = Typography;
+import avatar from '../public/avatar.png'
 
 
 
@@ -108,7 +109,7 @@ const Home = () => {
           className="homepageavtar"
           style={{ maxWidth: "100%" }}
           alt="coder"
-          src="/../public/avatar.png"
+          src={avatar}
         />
       </motion.div>
     </motion.div>
