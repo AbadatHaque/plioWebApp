@@ -13,7 +13,6 @@ import "antd/dist/reset.css";
 // import Nav from "./pages/nav";
 import { MenuOutlined } from "@ant-design/icons";
 import { Drawer,Typography } from "antd";
-import './app.css'
 import {
   Html5Outlined,
   CodeOutlined,
