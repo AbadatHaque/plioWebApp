@@ -28,6 +28,7 @@ import {
 } from "@ant-design/icons";
 const { Title } = Typography;
 import avatar from '../public/avatar.png'
+import profileImage from "../public/static/profile.jpg";
 
 
 
@@ -199,7 +200,7 @@ const About = () => {
         {/* Profile & About Section */}
         <Col xs={24} md={12} style={{ textAlign: "center" }}>
           <motion.div initial="hidden" animate="visible" variants={imageVariants}>
-            <Avatar size={180} src="/static/profile.jpeg" style={{ marginBottom: "20px" }} />
+            <Avatar size={180} src={profileImage} style={{ marginBottom: "20px" }} />
           </motion.div>
 
           <motion.div className="details" initial="hidden" animate="visible" variants={textVariants}>
