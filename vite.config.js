@@ -47,6 +47,7 @@ export default defineConfig({
         
       },
       manifest: {
+         id: "/",
         name: 'My PWA App',
         short_name: 'PWA App',
         description: 'My awesome PWA with caching',
@@ -56,12 +57,12 @@ export default defineConfig({
         start_url: "./",
         icons: [
           {
-            src: '/icons/icon-192x192.png',
+            src: 'logo.png',
             sizes: '192x192',
             type: 'image/png'
           },
           {
-            src: '/icons/icon-512x512.png',
+            src: 'logo512.jpeg',
             sizes: '512x512',
             type: 'image/png'
           }
