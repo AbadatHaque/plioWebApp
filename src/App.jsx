@@ -1,6 +1,6 @@
 
-import React, { useState, useEffect  } from "react";
-import { Layout, Menu, Button, Card,Grid , Form, Input, Avatar,Timeline, Col, Row,message,Switch,Modal   } from "antd";
+import React, { useState, useEffect } from "react";
+import { Layout, Menu, Button, Card, Grid, Form, Input, Avatar, Timeline, Col, Row, message, Switch, Modal } from "antd";
 import { motion } from "framer-motion";
 import { UserOutlined, MailOutlined, MessageOutlined } from "@ant-design/icons";
 import "antd/dist/reset.css";
@@ -12,7 +12,7 @@ import emailjs from "emailjs-com";
 import "antd/dist/reset.css";
 // import Nav from "./pages/nav";
 import { MenuOutlined } from "@ant-design/icons";
-import { Drawer,Typography } from "antd";
+import { Drawer, Typography } from "antd";
 import {
   Html5Outlined,
   CodeOutlined,
@@ -24,7 +24,8 @@ import {
   BranchesOutlined,
   BugOutlined,
   CloudOutlined,
-  FullscreenOutlined 
+  FullscreenOutlined,
+  FullscreenExitOutlined
 } from "@ant-design/icons";
 const { Title } = Typography;
 import avatar from '../public/avatar.png'
@@ -80,21 +81,21 @@ const Home = () => {
           animate={{ scale: 1 }}
           transition={{ duration: 0.5 }}
         >
-          <Button 
-            shape="circle" 
-            icon={<SiGithubactions />} 
+          <Button
+            shape="circle"
+            icon={<SiGithubactions />}
             onClick={() => window.open("https://github.com/AbadatHaque", "_blank")}
           />
-          <Button 
-            shape="circle" 
-            icon={<TiSocialLinkedinCircular />} 
+          <Button
+            shape="circle"
+            icon={<TiSocialLinkedinCircular />}
             onClick={() => window.open("https://www.linkedin.com/in/sk-abadat-haque-a1516b179/", "_blank")}
           />
           <Button shape="circle" icon={<FaSquareXTwitter />} />
         </motion.div>
-        <Button 
-          type="primary" 
-          onClick={() => window.open("/static/abadat_resume.pdf", "_blank")} 
+        <Button
+          type="primary"
+          onClick={() => window.open("/static/abadat_resume.pdf", "_blank")}
           id="viewResume"
         >
           View Resume
@@ -119,8 +120,8 @@ const Home = () => {
 
 
 const timelineVariants = {
-  hidden: { opacity: 0, y: 0,x:'-100%' },
-  visible: { opacity: 1, y: 0,x:0, transition: { duration: 0.8 } },
+  hidden: { opacity: 0, y: 0, x: '-100%' },
+  visible: { opacity: 1, y: 0, x: 0, transition: { duration: 0.8 } },
 };
 
 const imageVariants = {
@@ -129,7 +130,7 @@ const imageVariants = {
 };
 
 const textVariants = {
-  hidden: { opacity: 0, x:'100%' },
+  hidden: { opacity: 0, x: '100%' },
   visible: { opacity: 1, x: 0, transition: { duration: 1, ease: "easeOut" } },
 };
 
@@ -232,10 +233,10 @@ const About = () => {
 
 
 const cardVariants = {
-  hidden: { opacity: 0, y: 50, x:50 },
-  visible: { opacity: 1, y: 0,x:0, transition: { duration: 0.8 } },
-  hover: { 
-    scale: 1.05, 
+  hidden: { opacity: 0, y: 50, x: 50 },
+  visible: { opacity: 1, y: 0, x: 0, transition: { duration: 0.8 } },
+  hover: {
+    scale: 1.05,
     transition: { duration: 0.3 },
     background: "linear-gradient(135deg, #ff9a9e, #fad0c4)"
   },
@@ -324,17 +325,33 @@ const ProjectsPage = () => {
                   </p>
                 </Card>
               </a>
-              <Button
-                type="primary"
-                icon={<FullscreenOutlined />}
+              <motion.button
+                whileHover={{ scale: 1.5, rotate: 180, color: '#1890ff', boxShadow: "none", backgroundColor: "rgb(255, 254, 254)" }}
+                whileTap={{ scale: 3 }}
+                transition={{ duration: 0.3 }}
                 style={{
+                  color: "#fff",
                   position: "absolute",
                   top: "10px",
                   right: "10px",
                   zIndex: 10,
+                  background: "#1890ff",
+                  border: "none",
+                  borderRadius: "50%",
+                  width: "2rem",
+                  height: "2rem",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  cursor: "pointer",
+                  boxShadow: "0 4px 8px rgba(0,0,0,0.2)",
+                  border:'none'
                 }}
                 onClick={() => showModal(project)}
-              />
+              >
+                <FullscreenOutlined style={{ fontSize: "18px" }} />
+              </motion.button>
+
             </motion.div>
           </Col>
         ))}
@@ -350,12 +367,21 @@ const ProjectsPage = () => {
           borderRadius: "16px",
           boxShadow: "0 10px 20px rgba(0,0,0,0.3)",
         }}
+        closeIcon={
+          <motion.div
+            whileHover={{ scale: 0.9, rotate: -180 }}
+            whileTap={{ scale: 0.5 }}
+            transition={{ duration: 0.3 }}
+          >
+            <FullscreenExitOutlined style={{ fontSize: "24px", color: "#1677ff" }} />
+          </motion.div>
+        }
       >
         {selectedProject && (
           <div style={{ padding: "20px" }}>
-            <img 
-              src={selectedProject.image} 
-              alt={selectedProject.name} 
+            <img
+              src={selectedProject.image}
+              alt={selectedProject.name}
               style={{ width: "100%", borderRadius: "10px", marginBottom: "20px", boxShadow: "0 4px 8px rgba(0,0,0,0.1)" }}
             />
             <h3 style={{ fontSize: "20px", fontWeight: "bold", marginBottom: "10px" }}>Technologies Used:</h3>
@@ -393,7 +419,7 @@ const ContactForm = () => {
         message.error("Failed to send message. Please try again.");
       });
   };
-  
+
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -408,15 +434,18 @@ const ContactForm = () => {
         margin: "auto",
       }}
     >
-      <h2 style={{ marginBottom: "20px" }}>Contact Me</h2>
-      <Form layout="vertical" form={form}  onFinish={handleSubmit}>
-        <Form.Item label="Name" name="name" rules={[{ required: true, message: "Please enter your name" }]}> 
+      {/* <h2 style={{ marginBottom: "20px" }}>Contact Me</h2> */}
+      <h2 style={{ fontSize: "32px", fontWeight: "bold", textAlign: "center", marginBottom: "30px" }}>
+      Contact Me
+      </h2>
+      <Form layout="vertical" form={form} onFinish={handleSubmit}>
+        <Form.Item label="Name" name="name" rules={[{ required: true, message: "Please enter your name" }]}>
           <Input prefix={<UserOutlined />} placeholder="Your Name" />
         </Form.Item>
-        <Form.Item label="Email" name="email" rules={[{ required: true, type: "email", message: "Please enter a valid email" }]}> 
+        <Form.Item label="Email" name="email" rules={[{ required: true, type: "email", message: "Please enter a valid email" }]}>
           <Input prefix={<MailOutlined />} placeholder="Your Email" />
         </Form.Item>
-        <Form.Item label="Message" name="message" rules={[{ required: true, message: "Please enter your message" }]}> 
+        <Form.Item label="Message" name="message" rules={[{ required: true, message: "Please enter your message" }]}>
           <Input.TextArea rows={4} placeholder="Your Message" />
         </Form.Item>
         <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
@@ -453,72 +482,75 @@ const SkillPage = () => {
 
   return (
     <>
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 1 }}
-      style={{ padding: "50px", textAlign: "center", background: "#f0f2f5" }}
-    >
-      <Title level={2}>My Skills</Title>
-      <Row gutter={[16, 16]} justify="center">
-        {skills.map((skill, index) => (
-          <Col key={index} xs={24} sm={12} md={8} lg={6}>
-            <motion.div
-              whileHover={{ scale: 1.1, rotate: 5 }}
-              whileTap={{ scale: 0.9, rotate: -5 }}
-              initial={{ opacity: 0, y: 50 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-            >
-              <Card
-                style={{ borderLeft: `5px solid ${skill.color}`, cursor: "pointer", position: "relative" }}
-                hoverable
-                onClick={() => showModal(skill)}
-              >
-                <motion.div
-                  initial={{ scale: 0.8 }}
-                  animate={{ scale: 1 }}
-                  transition={{ duration: 0.5 }}
-                  style={{ fontSize: "24px", color: skill.color }}
-                >
-                  {skill.icon}
-                </motion.div>
-                <Title level={4} style={{ marginTop: "10px" }}>{skill.name}</Title>
-                <motion.div
-                  className="description-box"
-                  initial={{ opacity: 0 }}
-                  whileHover={{ opacity: 1 }}
-                  transition={{ duration: 0.3 }}
-                  style={{
-                    position: "absolute",
-                    bottom: "10px",
-                    left: "50%",
-                    transform: "translateX(-50%)",
-                    background: "rgba(0, 0, 0, 0.7)",
-                    color: "#fff",
-                    padding: "5px 10px",
-                    borderRadius: "5px",
-                    width: "90%",
-                    textAlign: "center",
-                    opacity: 0,
-                  }}
-                >
-                  {skill.description}
-                </motion.div>
-              </Card>
-            </motion.div>
-          </Col>
-        ))}
-      </Row>
-      <Modal
-        title={selectedSkill?.name}
-        visible={modalVisible}
-        onCancel={() => setModalVisible(false)}
-        footer={null}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 1 }}
+        style={{ padding: "50px", textAlign: "center", background: "#f0f2f5" }}
       >
-        <p>{selectedSkill?.description}</p>
-      </Modal>
-    </motion.div>
+        {/* <Title level={2}>My Skills</Title> */}
+        <h2 style={{ fontSize: "32px", fontWeight: "bold", textAlign: "center", marginBottom: "30px" }}>
+        My Skills
+      </h2>
+        <Row gutter={[16, 16]} justify="center">
+          {skills.map((skill, index) => (
+            <Col key={index} xs={24} sm={12} md={8} lg={6}>
+              <motion.div
+                whileHover={{ scale: 1.1, rotate: 5 }}
+                whileTap={{ scale: 0.9, rotate: -5 }}
+                initial={{ opacity: 0, y: 50 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+              >
+                <Card
+                  style={{ borderLeft: `5px solid ${skill.color}`, cursor: "pointer", position: "relative" }}
+                  hoverable
+                  onClick={() => showModal(skill)}
+                >
+                  <motion.div
+                    initial={{ scale: 0.8 }}
+                    animate={{ scale: 1 }}
+                    transition={{ duration: 0.5 }}
+                    style={{ fontSize: "24px", color: skill.color }}
+                  >
+                    {skill.icon}
+                  </motion.div>
+                  <Title level={4} style={{ marginTop: "10px" }}>{skill.name}</Title>
+                  <motion.div
+                    className="description-box"
+                    initial={{ opacity: 0 }}
+                    whileHover={{ opacity: 1 }}
+                    transition={{ duration: 0.3 }}
+                    style={{
+                      position: "absolute",
+                      bottom: "10px",
+                      left: "50%",
+                      transform: "translateX(-50%)",
+                      background: "rgba(0, 0, 0, 0.7)",
+                      color: "#fff",
+                      padding: "5px 10px",
+                      borderRadius: "5px",
+                      width: "90%",
+                      textAlign: "center",
+                      opacity: 0,
+                    }}
+                  >
+                    {skill.description}
+                  </motion.div>
+                </Card>
+              </motion.div>
+            </Col>
+          ))}
+        </Row>
+        <Modal
+          title={selectedSkill?.name}
+          visible={modalVisible}
+          onCancel={() => setModalVisible(false)}
+          footer={null}
+        >
+          <p>{selectedSkill?.description}</p>
+        </Modal>
+      </motion.div>
     </>
   );
 };
@@ -530,13 +562,13 @@ const App = () => {
   const renderPage = () => {
     switch (currentPage) {
       case "about":
-        return <About/>;
+        return <About />;
       case "projects":
         return <ProjectsPage />;
       case "contact":
         return <ContactForm />;
-        case "skill":
-          return <SkillPage />;
+      case "skill":
+        return <SkillPage />;
       default:
         return <Home />;
     }
@@ -564,126 +596,126 @@ const App = () => {
   return (
     <Layout>
       <motion.div
-      initial={{ y: -50, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.5, ease: "easeOut" }}
-    >
-      <motion.header
-        animate={{
-          background: isScrolled
-            ? "rgba(0, 21, 41, 0.9)"
-            : "rgba(0, 21, 41, 0.5)",
-          boxShadow: isScrolled
-            ? "0 4px 10px rgba(0, 0, 0, 0.3)"
-            : "none",
-        }}
-        transition={{ duration: 0.3 }}
-        style={{
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-          padding: "15px 40px",
-          borderRadius: "12px",
-          backdropFilter: "blur(10px)",
-          position: "fixed",
-          top: "10px",
-          left: "50%",
-          transform: "translateX(-50%)",
-          width: "90%",
-          zIndex: 1000,
-        }}
+        initial={{ y: -50, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.5, ease: "easeOut" }}
       >
-        {/* Desktop Menu */}
-        <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.3 }}
-          className="desktop-menu"
+        <motion.header
+          animate={{
+            background: isScrolled
+              ? "rgba(0, 21, 41, 0.9)"
+              : "rgba(0, 21, 41, 0.5)",
+            boxShadow: isScrolled
+              ? "0 4px 10px rgba(0, 0, 0, 0.3)"
+              : "none",
+          }}
+          transition={{ duration: 0.3 }}
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+            padding: "15px 40px",
+            borderRadius: "12px",
+            backdropFilter: "blur(10px)",
+            position: "fixed",
+            top: "10px",
+            left: "50%",
+            transform: "translateX(-50%)",
+            width: "90%",
+            zIndex: 1000,
+          }}
         >
-         <Menu
-            theme="dark"
-            mode="horizontal"
-            selectedKeys={[currentPage]}
-            style={{
-              background: "transparent",
-              border: "none",
-              display: "flex",
-              justifyContent:'center',
-              gap: "30px",
-            }}
+          {/* Desktop Menu */}
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3 }}
+            className="desktop-menu"
           >
-            {["home", "about", "projects", "contact", "skill"].map((item) => (
-              <motion.div
-                key={item}
-                whileHover={{ scale: 1.2, background: "rgba(255, 255, 255, 0.1)", borderRadius: "8px", padding: "5px 15px" }}
-                whileTap={{ scale: 0.9 }}
-                transition={{ duration: 0.3 }}
-                style={{ display: "inline-block", cursor: "pointer" }}
-                onClick={() => setCurrentPage(item)}
-              >
-                <Menu.Item key={item} style={{ fontSize: "18px", fontWeight: "bold", color: currentPage === item ? "rgb(255, 255, 255)" : "black" }}>
-                  {item.charAt(0).toUpperCase() + item.slice(1)}
-                </Menu.Item>
-              </motion.div>
-            ))}
-          </Menu>
-        </motion.div>
-
-        {/* Mobile Menu Button */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.5 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ delay: 0.5 }}
-        >
-          <MenuOutlined
-            className="mobile-menu-button"
-            onClick={toggleDrawer}
-            style={{
-              fontSize: "24px",
-              color: "white",
-              cursor: "pointer",
-              display: "none",
-            }}
-          />
-        </motion.div>
-
-        {/* Mobile Drawer Menu */}
-        <Drawer title="Menu" placement="right" onClose={toggleDrawer} open={isDrawerOpen}>
-          <Menu theme="light" mode="vertical">
-            {["home", "about", "projects", "contact", "skill"].map((item) => (
-              
-              <motion.div
-              key={item}
-              whileHover={{ scale: 1.2, background: "rgba(255, 255, 255, 0.1)", borderRadius: "8px", padding: "5px 15px" }}
-              whileTap={{ scale: 0.9 }}
-              transition={{ duration: 0.3 }}
-              // style={{  cursor: "pointer" }}
-              background={ currentPage === item ? "rgba(255, 255, 255, 0.2)" : "transparent"} //
+            <Menu
+              theme="dark"
+              mode="horizontal"
+              selectedKeys={[currentPage]}
               style={{
-                cursor: "pointer",
-                backgroundColor: currentPage === item ? "rgba(255, 255, 255, 0.2)" : "transparent", // Active item background
-                borderRadius: "8px",
-                padding: "8px 15px",
-                transition: "background 0.3s ease",
+                background: "transparent",
+                border: "none",
+                display: "flex",
+                justifyContent: 'center',
+                gap: "30px",
               }}
-              onClick={() =>{ setCurrentPage(item); toggleDrawer()}}
             >
-              <Menu.Item key={item} style={{ fontSize: "18px", fontWeight: "bold", backgroundColor: currentPage === item ? "rgba(255, 255, 255, 0.2)" : "transparent", color: currentPage === item ? "rgba(100, 105, 125, 0.88)" : "black"}}>
-                {item.charAt(0).toUpperCase() + item.slice(1)}
-              </Menu.Item>
-            </motion.div>
-      //     ))}
-      //   </Menu>
-      // </motion.div>
+              {["home", "about", "projects", "contact", "skill"].map((item) => (
+                <motion.div
+                  key={item}
+                  whileHover={{ scale: 1.2, background: "rgba(255, 255, 255, 0.1)", borderRadius: "8px", padding: "5px 15px" }}
+                  whileTap={{ scale: 0.9 }}
+                  transition={{ duration: 0.3 }}
+                  style={{ display: "inline-block", cursor: "pointer" }}
+                  onClick={() => setCurrentPage(item)}
+                >
+                  <Menu.Item key={item} style={{ fontSize: "18px", fontWeight: "bold", color: currentPage === item ? "rgb(255, 255, 255)" : "black" }}>
+                    {item.charAt(0).toUpperCase() + item.slice(1)}
+                  </Menu.Item>
+                </motion.div>
+              ))}
+            </Menu>
+          </motion.div>
 
-            ))}
-          </Menu>
+          {/* Mobile Menu Button */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.5 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 0.5 }}
+          >
+            <MenuOutlined
+              className="mobile-menu-button"
+              onClick={toggleDrawer}
+              style={{
+                fontSize: "24px",
+                color: "white",
+                cursor: "pointer",
+                display: "none",
+              }}
+            />
+          </motion.div>
+
+          {/* Mobile Drawer Menu */}
+          <Drawer title="Menu" placement="right" onClose={toggleDrawer} open={isDrawerOpen}>
+            <Menu theme="light" mode="vertical">
+              {["home", "about", "projects", "contact", "skill"].map((item) => (
+
+                <motion.div
+                  key={item}
+                  whileHover={{ scale: 1.2, background: "rgba(255, 255, 255, 0.1)", borderRadius: "8px", padding: "5px 15px" }}
+                  whileTap={{ scale: 0.9 }}
+                  transition={{ duration: 0.3 }}
+                  // style={{  cursor: "pointer" }}
+                  background={currentPage === item ? "rgba(255, 255, 255, 0.2)" : "transparent"} //
+                  style={{
+                    cursor: "pointer",
+                    backgroundColor: currentPage === item ? "rgba(255, 255, 255, 0.2)" : "transparent", // Active item background
+                    borderRadius: "8px",
+                    padding: "8px 15px",
+                    transition: "background 0.3s ease",
+                  }}
+                  onClick={() => { setCurrentPage(item); toggleDrawer() }}
+                >
+                  <Menu.Item key={item} style={{ fontSize: "18px", fontWeight: "bold", backgroundColor: currentPage === item ? "rgba(255, 255, 255, 0.2)" : "transparent", color: currentPage === item ? "rgba(100, 105, 125, 0.88)" : "black" }}>
+                    {item.charAt(0).toUpperCase() + item.slice(1)}
+                  </Menu.Item>
+                </motion.div>
+                //     ))}
+                //   </Menu>
+                // </motion.div>
+
+              ))}
+            </Menu>
             {/* // <Menu.Item key={item} onClick={toggleDrawer}>
             //   {item.charAt(0).toUpperCase() + item.slice(1)}
             // </Menu.Item> */}
-        </Drawer>
-      </motion.header>
-    </motion.div>
+          </Drawer>
+        </motion.header>
+      </motion.div>
 
 
 
@@ -711,7 +743,7 @@ const App = () => {
         }}
       >
         <motion.div whileHover={{ textShadow: "0px 0px 8px white" }}>
-        © {new Date().getFullYear()} My Portfolio. All Rights Reserved.
+          © {new Date().getFullYear()} My Portfolio. All Rights Reserved.
         </motion.div>
       </Footer>
     </Layout>
