@@ -3,18 +3,18 @@ import { registerRoute } from 'workbox-routing';
 import { CacheFirst, StaleWhileRevalidate, NetworkFirst } from 'workbox-strategies';
 import { ExpirationPlugin } from 'workbox-expiration';
 
-// Precache files
-precacheAndRoute(self.__WB_MANIFEST);
+// Pre-cache important assets
+precacheAndRoute(self.__WB_MANIFEST || []);
 
-// Cache API requests
+// Cache Netlify site
 registerRoute(
-  ({ url }) => url.origin === 'https://your-api-url.com',
+  ({ url }) => url.origin === 'https://pfoliowebapp.netlify.app',
   new NetworkFirst({
-    cacheName: 'api-cache',
+    cacheName: 'netlify-site-cache',
     plugins: [
       new ExpirationPlugin({
-        maxEntries: 50,
-        maxAgeSeconds: 60 * 60 * 24, // 1 day
+        maxEntries: 100,
+        maxAgeSeconds: 60 * 60 * 24 * 7, // 7 days
       }),
     ],
   })
@@ -27,22 +27,22 @@ registerRoute(
     cacheName: 'image-cache',
     plugins: [
       new ExpirationPlugin({
-        maxEntries: 100,
-        maxAgeSeconds: 60 * 60 * 24 * 7, // 1 week
+        maxEntries: 50,
+        maxAgeSeconds: 60 * 60 * 24 * 30, // 30 days
       }),
     ],
   })
 );
 
-// Cache CSS & JS
+// Cache scripts & styles
 registerRoute(
   ({ request }) => request.destination === 'script' || request.destination === 'style',
   new StaleWhileRevalidate({
-    cacheName: 'static-resources',
+    cacheName: 'static-assets',
     plugins: [
       new ExpirationPlugin({
         maxEntries: 50,
-        maxAgeSeconds: 60 * 60 * 24 * 30, // 30 days
+        maxAgeSeconds: 60 * 60 * 24 * 7, // 7 days
       }),
     ],
   })

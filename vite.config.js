@@ -11,7 +11,8 @@ export default defineConfig({
       workbox: {
         runtimeCaching: [
           {
-            urlPattern: /^https:\/\/your-api-url\.com\/.*$/, // Cache API responses
+            // urlPattern: /^https:\/\/your-api-url\.com\/.*$/, // Cache API responses
+            urlPattern: /^https:\/\/pfoliowebapp\.netlify\.app\/.*$/, // Cache all requests from Netlify site
             handler: 'NetworkFirst', // First try network, then fallback to cache
             options: {
               cacheName: 'api-cache',
