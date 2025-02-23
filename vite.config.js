@@ -11,11 +11,10 @@ export default defineConfig({
       workbox: {
         runtimeCaching: [
           {
-            // urlPattern: /^https:\/\/your-api-url\.com\/.*$/, // Cache API responses
-            urlPattern: /^https:\/\/pfoliowebapp\.netlify\.app\/.*$/, // Cache all requests from Netlify site
-            handler: 'NetworkFirst', // First try network, then fallback to cache
+            urlPattern: ({ request }) => request.mode === 'navigate', // Cache all pages
+            handler: 'NetworkFirst',
             options: {
-              cacheName: 'api-cache',
+              cacheName: 'page-cache',
               expiration: {
                 maxEntries: 50,
                 maxAgeSeconds: 60 * 60 * 24, // 1 day
@@ -45,6 +44,7 @@ export default defineConfig({
             },
           },
         ],
+        
       },
       manifest: {
         name: 'My PWA App',
@@ -53,6 +53,7 @@ export default defineConfig({
         theme_color: '#ffffff',
         background_color: '#ffffff',
         display: 'standalone',
+        start_url: "./",
         icons: [
           {
             src: '/icons/icon-192x192.png',
@@ -66,6 +67,7 @@ export default defineConfig({
           }
         ]
       }
+      
     })
 
   ],
