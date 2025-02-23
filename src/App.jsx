@@ -138,13 +138,52 @@ const { useBreakpoint } = Grid; // Ant Design responsive breakpoints
 
 const About = () => {
   const screens = useBreakpoint(); // Detect screen size
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [modalContent, setModalContent] = useState("");
 
+  const showModal = (desc) => {
+    setModalContent(desc);  // Set the content to be shown in the modal
+    setIsModalVisible(true); // Show the modal
+  };
+
+  const handleCancel = () => {
+    setIsModalVisible(false); // Close the modal
+  };
   const journeyData = [
-    { title: "Frontend Developer", desc: "Gained foundational knowledge and developed a passion for technology.", time: "2024 - Present", color: "default" },
-    { title: "UX Developer", desc: "Specialized in software development and UI/UX Development.", time: "2021 - 2024", color: "green" },
-    { title: "React Js", desc: "Started working on dynamic web applications using React and Ant Design.", time: "2021 - 2021", color: "default" },
-    { title: "Master in Computer Application", desc: "Gained foundational knowledge and developed a passion for technology.", time: "2023 - 2025", color: "blue" },
+    {
+      title: "Frontend Developer",
+      company: "Core Ventum",
+      smallDesc: "Gained foundational knowledge and developed a passion for technology.", // Small screen description
+      fullDesc: "Gained foundational knowledge and developed a passion for technology, including front-end development technologies such as HTML, CSS, JavaScript, and modern frameworks like React JS. Always eager to explore new tools and methodologies.", // Full screen description
+      time: "2024 - Present",
+      color: "default",
+    },
+    {
+      title: "UX Developer",
+      company: "Mass Software Solutions",
+      smallDesc: "Specialized in software development and UX Developer, gaining knowledge in ES6, React JS, Redux Toolkit, Jira, Git, and Bitbucket.", // Small screen description
+      fullDesc: "Specialized in software development and UX Developer, gaining extensive knowledge in ES6, React JS, Redux Toolkit, Jira, Git, and Bitbucket. Worked collaboratively with a team for 2.9 years to create intuitive, user-centric interfaces while continuously expanding my technical expertise and problem-solving abilities.", // Full screen description
+      time: "2021 - 2024",
+      color: "green",
+    },
+    {
+      title: "React Js",
+      company: "EJOB India",
+      smallDesc: "Completed a 5-month course at eJob India, Kolkata, focused on building dynamic web applications using React JS.", // Small screen description
+      fullDesc: "Completed a 5-month course at eJob India, Kolkata, focused on building dynamic web applications using React JS and ES6, gaining hands-on experience in modern front-end development, including understanding React hooks, components, and state management techniques.", // Full screen description
+      time: "2021 - 2021",
+      color: "default",
+    },
+    {
+      title: "Master in Computer Application",
+      company: "Online Uttaranchal University",
+      smallDesc: "Gained in-depth expertise in computer science, honing both technical skills and a passion for innovative solutions.", // Small screen description
+      fullDesc: "Gained in-depth expertise in computer science, honing both technical skills and a strong passion for innovative technological solutions and their real-world applications. Covered a variety of programming languages, algorithms, database management, and software engineering principles.", // Full screen description
+      time: "2023 - 2025",
+      color: "blue",
+    },
   ];
+
 
   return (
     <motion.div
@@ -166,20 +205,164 @@ const About = () => {
         <Col xs={24} md={12}>
           <h2 style={{ fontSize: "20px", fontWeight: "bold" }}>My Journey</h2>
           {screens.md ? (
-            // Show Timeline on Medium & Large Screens
-            <Timeline mode="alternate">
-              {journeyData.map((item, index) => (
-                <Timeline.Item key={index} color={item.color}>
-                  <motion.div initial="hidden" whileInView="visible" variants={timelineVariants} viewport={{ once: true }}>
-                    <Card style={{ boxShadow: "0 6px 12px rgba(0,0,0,0.2)", padding: "20px" }}>
-                      <h3 style={{ fontSize: "18px", fontWeight: "bold" }}>{item.title}</h3>
-                      <p style={{ fontSize: "15px" }}>{item.desc}</p>
-                      <p style={{ fontSize: "13px", fontWeight: "bold" }}>{item.time}</p>
-                    </Card>
+            <>
+              <Timeline mode="alternate">
+                {journeyData.map((item, index) => (
+                  <Timeline.Item key={index} color={item.color}>
+                    <motion.div
+                      initial="hidden"
+                      animate="visible"
+                      whileHover="hover"
+                      variants={cardVariants}
+                      style={{ position: "relative", borderRadius: "10px", overflow: "hidden" }}
+                    >
+                      <Card
+                        title={item.title} // This will remain as the designation (title)
+                        style={{
+                          boxShadow: "0 6px 12px rgba(0,0,0,0.2)",
+                          borderRadius: "10px",
+                          overflow: "hidden",
+                          textAlign: "center",
+                          transition: "background 0.3s ease-in-out",
+                        }}
+                      >
+                        {/* Company Name - You can replace 'item.company' with your specific property for company */}
+                        <p style={{ fontSize: "14px", fontWeight: "bold" }}>
+                          {item.company || "Company Name"}
+                        </p>
+
+                        {/* Valid Year - Displayed with bold styling */}
+                        <p style={{ fontSize: "13px", fontWeight: "bold" }}>
+                          {item.time} {/* You can add something like "Valid Year" or any custom text if needed */}
+                        </p>
+
+                        {/* Description - Initially truncated */}
+                        <p style={{ fontSize: "16px", lineHeight: "1.6" }}>
+                          {item.smallDesc}
+                          {/* {item.desc.length > 100 ? `${item.desc.slice(0, 100)}...` : item.desc} */}
+                        </p>
+
+                        <motion.button
+                          whileHover={{ scale: 1.5, rotate: 180, color: '#1890ff', boxShadow: "none", backgroundColor: "rgb(255, 254, 254)" }}
+                          whileTap={{ scale: 3 }}
+                          transition={{ duration: 0.3 }}
+                          style={{
+                            color: "#fff",
+                            position: "absolute",
+                            top: "10px",
+                            right: "10px",
+                            zIndex: 10,
+                            background: "#1890ff",
+                            border: "none",
+                            borderRadius: "50%",
+                            width: "2rem",
+                            height: "2rem",
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "center",
+                            cursor: "pointer",
+                            boxShadow: "0 4px 8px rgba(0,0,0,0.2)",
+                          }}
+                          onClick={() => showModal(item)} // Show full details on click
+                        >
+                          <FullscreenOutlined style={{ fontSize: "18px" }} />
+                        </motion.button>
+                      </Card>
+                    </motion.div>
+                  </Timeline.Item>
+                ))}
+              </Timeline>
+
+
+
+              <Modal
+                visible={isModalVisible}
+                onCancel={handleCancel}
+                footer={[
+                  <motion.div
+                    key="close"
+                    initial={{ scale: 1 }}
+                    whileHover={{ scale: 1.1, rotate: 10, backgroundColor: "#40a9ff" }}
+                    whileTap={{ scale: 0.9 }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    <Button
+                      onClick={handleCancel}
+                      style={{
+                        backgroundColor: "#1890ff",
+                        color: "#fff",
+                        border: "none",
+                        borderRadius: "5px",
+                        fontWeight: "bold",
+                        boxShadow: "0 6px 12px rgba(0, 0, 0, 0.1)",
+                        transition: "all 0.3s ease",
+                        padding: "10px 20px",
+                        fontSize: "16px",
+                      }}
+                    >
+                      Close
+                    </Button>
+                  </motion.div>,
+                ]}
+                width="70%" // Adjust modal width
+                style={{
+                  borderRadius: "15px", // More rounded modal corners
+                  boxShadow: "0 10px 30px rgba(0, 0, 0, 0.2)", // Stronger shadow for depth
+                  background: "linear-gradient(to bottom, #fff, #f1f1f1)", // Gradient background for the modal
+                  padding: "25px", // More padding for the modal body
+                  lineHeight: "1.7", // Line height for better readability
+                }}
+                title={
+                  <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: 0.5 }}
+                    style={{ textAlign: "center", fontWeight: "bold", fontSize: "26px", color: "#1890ff" }}
+                  >
+                    {modalContent.title}
                   </motion.div>
-                </Timeline.Item>
-              ))}
-            </Timeline>
+                }
+              >
+                {/* Title of the Modal */}
+
+                {/* Modal Content */}
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.5, delay: 0.3 }}
+                  style={{ marginBottom: "15px", fontSize: "14px", color: "#555", textAlign: "center" }}
+                >
+                  <strong>Company:</strong> {modalContent.company} <br />
+                  <strong>Duration:</strong> {modalContent.time}
+                </motion.div>
+
+                {/* Full Description */}
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: 0.5 }}
+                  style={{ fontSize: "16px", color: "#333", lineHeight: "1.6", marginBottom: "20px" }}
+                >
+                  <p>{modalContent.fullDesc}</p>
+                </motion.div>
+
+                {/* Additional Notes */}
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 0.5, delay: 0.7 }}
+                  style={{ fontSize: "14px", color: "#777", marginTop: "20px" }}
+                >
+                  <p><strong>Note:</strong> This is a comprehensive description providing in-depth insights about the role and responsibilities at the respective company.</p>
+                </motion.div>
+              </Modal>
+
+
+
+            </>
+
+
+
           ) : (
             // Show Cards on Mobile Screens
             <Row gutter={[16, 16]}>
@@ -345,7 +528,7 @@ const ProjectsPage = () => {
                   justifyContent: "center",
                   cursor: "pointer",
                   boxShadow: "0 4px 8px rgba(0,0,0,0.2)",
-                  border:'none'
+                  border: 'none'
                 }}
                 onClick={() => showModal(project)}
               >
@@ -436,7 +619,7 @@ const ContactForm = () => {
     >
       {/* <h2 style={{ marginBottom: "20px" }}>Contact Me</h2> */}
       <h2 style={{ fontSize: "32px", fontWeight: "bold", textAlign: "center", marginBottom: "30px" }}>
-      Contact Me
+        Contact Me
       </h2>
       <Form layout="vertical" form={form} onFinish={handleSubmit}>
         <Form.Item label="Name" name="name" rules={[{ required: true, message: "Please enter your name" }]}>
@@ -462,7 +645,7 @@ const skills = [
   { name: "React.js", icon: <CodeOutlined />, color: "#61dafb", description: "Skilled in building SPA with React and state management." },
   { name: "Redux Toolkit", icon: <DatabaseOutlined />, color: "#764abc", description: "Experience managing state efficiently using Redux Toolkit." },
   { name: "Next.js", icon: <ApiOutlined />, color: "#000", description: "Expertise in SSR, SSG, and API routes with Next.js." },
-  { name: "React Native", icon: <MobileOutlined />, color: "#00d8ff", description: "Experience in developing cross-platform mobile applications." },
+  // { name: "React Native", icon: <MobileOutlined />, color: "#00d8ff", description: "Experience in developing cross-platform mobile applications." },
   { name: "Git", icon: <BranchesOutlined />, color: "#f34f29", description: "Version control and collaboration using Git." },
   { name: "GitHub", icon: <GithubOutlined />, color: "#333", description: "Managing repositories, pull requests, and CI/CD workflows." },
   { name: "Bitbucket", icon: <GitlabOutlined />, color: "#205081", description: "Experience in working with Bitbucket repositories." },
@@ -490,8 +673,8 @@ const SkillPage = () => {
       >
         {/* <Title level={2}>My Skills</Title> */}
         <h2 style={{ fontSize: "32px", fontWeight: "bold", textAlign: "center", marginBottom: "30px" }}>
-        My Skills
-      </h2>
+          My Skills
+        </h2>
         <Row gutter={[16, 16]} justify="center">
           {skills.map((skill, index) => (
             <Col key={index} xs={24} sm={12} md={8} lg={6}>
