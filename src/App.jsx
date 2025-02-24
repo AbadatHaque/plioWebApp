@@ -153,18 +153,20 @@ const About = () => {
     {
       title: "Frontend Developer",
       company: "Core Ventum",
-      smallDesc: "Gained foundational knowledge and developed a passion for technology.", // Small screen description
-      fullDesc: "Gained foundational knowledge and developed a passion for technology, including front-end development technologies such as HTML, CSS, JavaScript, and modern frameworks like React JS. Always eager to explore new tools and methodologies.", // Full screen description
+      smallDesc: "Front-end developer at Core Ventum, building a SaaS platform with React JS and Ant Design.", // Small screen description
+      fullDesc: "As a Front-end Developer at Core Ventum, a rapidly growing SaaS startup, I play a critical role in building and enhancing the user interface of our platform. Working closely with the company owner and other key stakeholders, I actively participate in defining the product’s features, design decisions, and user experience improvements. The platform is built with React JS, Ant Design, HTML5, and CSS3, and I work on creating responsive, intuitive, and visually appealing interfaces. My contributions extend beyond just coding – I collaborate on brainstorming sessions, offer insights on user-centric design, and ensure the platform remains scalable and easy to maintain. This hands-on involvement in the startup's growth allows me to directly impact the direction and success of the product while staying up-to-date with the latest front-end technologies.", // Full screen description
       time: "2024 - Present",
       color: "default",
+      location: 'New Delhi'
     },
     {
       title: "UX Developer",
       company: "Mass Software Solutions",
-      smallDesc: "Specialized in software development and UX Developer, gaining knowledge in ES6, React JS, Redux Toolkit, Jira, Git, and Bitbucket.", // Small screen description
-      fullDesc: "Specialized in software development and UX Developer, gaining extensive knowledge in ES6, React JS, Redux Toolkit, Jira, Git, and Bitbucket. Worked collaboratively with a team for 2.9 years to create intuitive, user-centric interfaces while continuously expanding my technical expertise and problem-solving abilities.", // Full screen description
+      smallDesc: "UX Developer at Mass Software Solutions, skilled in React JS, TypeScript, jQuery, and Git/Bitbucket. Worked with global teams.", // Small screen description
+      fullDesc: "During my 2.9 years at Mass Software Solutions, I specialized as a UX Developer, working on the design and development of intuitive, user-centric interfaces. I utilized React JS (both class and functional components), TypeScript, and jQuery to build scalable and responsive applications. For state management, we relied heavily on Redux Toolkit, which streamlined our development process by providing a robust and predictable state management solution. For version control and team collaboration, we used Git and Bitbucket, ensuring smooth code integration, efficient branching, and code reviews across distributed teams. My projects included collaborating with clients from the USA, Ireland, and the Netherlands, while leveraging ES6, Redux Toolkit, and Jira for task management and project tracking. This experience helped me grow technically and as a collaborative team player, working in a dynamic, global environment.", // Full screen description
       time: "2021 - 2024",
       color: "green",
+      location: 'Kolkata'
     },
     {
       title: "React Js",
@@ -173,14 +175,16 @@ const About = () => {
       fullDesc: "Completed a 5-month course at eJob India, Kolkata, focused on building dynamic web applications using React JS and ES6, gaining hands-on experience in modern front-end development, including understanding React hooks, components, and state management techniques.", // Full screen description
       time: "2021 - 2021",
       color: "default",
+      location: 'Kolkata'
     },
     {
       title: "Master in Computer Application",
       company: "Online Uttaranchal University",
       smallDesc: "Gained in-depth expertise in computer science, honing both technical skills and a passion for innovative solutions.", // Small screen description
-      fullDesc: "Gained in-depth expertise in computer science, honing both technical skills and a strong passion for innovative technological solutions and their real-world applications. Covered a variety of programming languages, algorithms, database management, and software engineering principles.", // Full screen description
+      fullDesc: "During my time pursuing a Master in Computer Application at Online Uttaranchal University (2023-2025), I gained in-depth expertise in computer science, strengthening both my technical skills and my passion for innovative technological solutions. The program covered a wide range of subjects, including advanced programming languages, algorithms, data structures, database management, and software engineering principles. I also delved into areas like machine learning, web development, and mobile application development, gaining hands-on experience in building and deploying software solutions. This academic journey allowed me to apply theoretical concepts to real-world problems, equipping me with the knowledge and skills to develop scalable, efficient, and user-centric applications. My coursework and projects helped me cultivate problem-solving abilities, teamwork, and critical thinking, which I am eager to apply in future technological challenges.", // Full screen description
       time: "2023 - 2025",
       color: "blue",
+      location: 'Dehradun'
     },
   ];
 
@@ -221,53 +225,77 @@ const About = () => {
                         style={{
                           boxShadow: "0 6px 12px rgba(0,0,0,0.2)",
                           borderRadius: "10px",
-                          overflow: "hidden",
-                          textAlign: "center",
-                          transition: "background 0.3s ease-in-out",
+                          padding: "20px", // Padding inside the card for a clean layout
+                          position: "relative", // Position relative for button alignment
+                          backgroundColor: "#f9f9f9", // Light background for the card
+                          textAlign: "left", // Left-align text for better readability
                         }}
                       >
-                        {/* Company Name - You can replace 'item.company' with your specific property for company */}
-                        <p style={{ fontSize: "14px", fontWeight: "bold" }}>
-                          {item.company || "Company Name"}
-                        </p>
+                        <div style={{ marginBottom: "10px" }}>
+                          {/* Company Name and Location */}
+                          <div style={{ display: "flex", alignItems: "center", marginBottom: "8px" }}>
+                            <span
+                              style={{
+                                fontSize: "14px",
+                                fontWeight: "bold",
+                                marginRight: "10px",
+                                color: "#333",
+                              }}
+                            >
+                              {item.company || "Company Name"}
+                            </span>
+                            <span style={{ fontSize: "12px", color: "#777" }}>
+                              {item.location || "Location not specified"}
+                            </span>
+                          </div>
 
-                        {/* Valid Year - Displayed with bold styling */}
-                        <p style={{ fontSize: "13px", fontWeight: "bold" }}>
-                          {item.time} {/* You can add something like "Valid Year" or any custom text if needed */}
-                        </p>
+                          {/* Valid Year */}
+                          <p style={{ fontSize: "13px", fontWeight: "bold", color: "#555", marginBottom: "8px" }}>
+                            {item.time}
+                          </p>
 
-                        {/* Description - Initially truncated */}
-                        <p style={{ fontSize: "16px", lineHeight: "1.6" }}>
-                          {item.smallDesc}
-                          {/* {item.desc.length > 100 ? `${item.desc.slice(0, 100)}...` : item.desc} */}
-                        </p>
+                          {/* Short Description (Small screen description) */}
+                          <p style={{ fontSize: "15px", lineHeight: "1.6", color: "#333", marginBottom: "12px" }}>
+                            {item.smallDesc}
+                          </p>
+                        </div>
 
+                        {/* Fullscreen Button to show the modal with detailed information */}
                         <motion.button
-                          whileHover={{ scale: 1.5, rotate: 180, color: '#1890ff', boxShadow: "none", backgroundColor: "rgb(255, 254, 254)" }}
-                          whileTap={{ scale: 3 }}
+                          whileHover={{
+                            scale: 1.1,
+                            rotate: 180,
+                            backgroundColor: "#1890ff",
+                            color: "#fff",
+                            boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)",
+                          }}
+                          whileTap={{ scale: 0.9 }}
                           transition={{ duration: 0.3 }}
                           style={{
                             color: "#fff",
                             position: "absolute",
-                            top: "10px",
-                            right: "10px",
+                            top: "15px",
+                            right: "15px",
                             zIndex: 10,
-                            background: "#1890ff",
+                            backgroundColor: "#1890ff",
                             border: "none",
                             borderRadius: "50%",
-                            width: "2rem",
-                            height: "2rem",
+                            width: "2.5rem",
+                            height: "2.5rem",
                             display: "flex",
                             alignItems: "center",
                             justifyContent: "center",
                             cursor: "pointer",
-                            boxShadow: "0 4px 8px rgba(0,0,0,0.2)",
+                            boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)",
                           }}
                           onClick={() => showModal(item)} // Show full details on click
                         >
                           <FullscreenOutlined style={{ fontSize: "18px" }} />
                         </motion.button>
                       </Card>
+
+
+
                     </motion.div>
                   </Timeline.Item>
                 ))}
@@ -333,6 +361,7 @@ const About = () => {
                   style={{ marginBottom: "15px", fontSize: "14px", color: "#555", textAlign: "center" }}
                 >
                   <strong>Company:</strong> {modalContent.company} <br />
+                  <strong>Location:</strong> {modalContent.location} <br /> {/* Added location */}
                   <strong>Duration:</strong> {modalContent.time}
                 </motion.div>
 
@@ -356,6 +385,7 @@ const About = () => {
                   <p><strong>Note:</strong> This is a comprehensive description providing in-depth insights about the role and responsibilities at the respective company.</p>
                 </motion.div>
               </Modal>
+
 
 
 
