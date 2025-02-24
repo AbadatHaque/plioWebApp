@@ -25,7 +25,11 @@ import {
   BugOutlined,
   CloudOutlined,
   FullscreenOutlined,
-  FullscreenExitOutlined
+  FullscreenExitOutlined,
+  KeyOutlined,
+  CloudDownloadOutlined,
+  AppstoreAddOutlined ,
+  
 } from "@ant-design/icons";
 const { Title } = Typography;
 import avatar from '../public/avatar.png'
@@ -675,7 +679,10 @@ const skills = [
   { name: "React.js", icon: <CodeOutlined />, color: "#61dafb", description: "Skilled in building SPA with React and state management." },
   { name: "Redux Toolkit", icon: <DatabaseOutlined />, color: "#764abc", description: "Experience managing state efficiently using Redux Toolkit." },
   { name: "Next.js", icon: <ApiOutlined />, color: "#000", description: "Expertise in SSR, SSG, and API routes with Next.js." },
-  // { name: "React Native", icon: <MobileOutlined />, color: "#00d8ff", description: "Experience in developing cross-platform mobile applications." },
+  { name: "TypeScript", icon: <CodeOutlined />, color: "#3178c6", description: "Strong knowledge of static typing and improving development with TypeScript." },
+  { name: "SSO", icon: <KeyOutlined />, color: "#5c6bc0", description: "Experience in integrating Single Sign-On (SSO) for seamless authentication." },
+  { name: "PWA", icon: <CloudDownloadOutlined />, color: "#ff4081", description: "Skilled in building Progressive Web Apps for offline-first, fast-loading experiences." },
+  { name: "REST API", icon: <AppstoreAddOutlined />, color: "#2196f3", description: "Experienced in building and consuming RESTful APIs." },
   { name: "Git", icon: <BranchesOutlined />, color: "#f34f29", description: "Version control and collaboration using Git." },
   { name: "GitHub", icon: <GithubOutlined />, color: "#333", description: "Managing repositories, pull requests, and CI/CD workflows." },
   { name: "Bitbucket", icon: <GitlabOutlined />, color: "#205081", description: "Experience in working with Bitbucket repositories." },
@@ -683,6 +690,7 @@ const skills = [
   { name: "jQuery", icon: <CloudOutlined />, color: "#0769ad", description: "Experience in using jQuery for DOM manipulation." },
   { name: "Ant Design", icon: <CodeOutlined />, color: "#1890ff", description: "UI framework expertise for building sleek interfaces." },
 ];
+
 
 const SkillPage = () => {
   const [modalVisible, setModalVisible] = useState(false);
