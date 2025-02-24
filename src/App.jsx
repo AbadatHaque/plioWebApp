@@ -28,8 +28,8 @@ import {
   FullscreenExitOutlined,
   KeyOutlined,
   CloudDownloadOutlined,
-  AppstoreAddOutlined ,
-  
+  AppstoreAddOutlined,
+
 } from "@ant-design/icons";
 const { Title } = Typography;
 import avatar from '../public/avatar.png'
@@ -266,6 +266,7 @@ const About = () => {
 
                         {/* Fullscreen Button to show the modal with detailed information */}
                         <motion.button
+                        className="fullscreen-button"
                           whileHover={{
                             scale: 1.1,
                             rotate: 180,
@@ -275,27 +276,24 @@ const About = () => {
                           }}
                           whileTap={{ scale: 0.9 }}
                           transition={{ duration: 0.3 }}
-                          style={{
-                            color: "#fff",
-                            position: "absolute",
-                            top: "15px",
-                            right: "15px",
-                            zIndex: 10,
-                            backgroundColor: "#1890ff",
-                            border: "none",
-                            borderRadius: "50%",
-                            width: "2.5rem",
-                            height: "2.5rem",
-                            display: "flex",
-                            alignItems: "center",
-                            justifyContent: "center",
-                            cursor: "pointer",
-                            boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)",
-                          }}
                           onClick={() => showModal(item)} // Show full details on click
                         >
                           <FullscreenOutlined style={{ fontSize: "18px" }} />
                         </motion.button>
+                        {/* Media Query Adjustments for Mobile Devices */}
+                        <style>
+                          {`
+                              @media (max-width: 768px) {
+                                .fullscreen-button {
+                                  top: 10px;
+                                  right: 10px;
+                                  width: 2rem;
+                                  height: 2rem;
+                                }
+                              }
+                            `}
+                        </style>
+
                       </Card>
 
 
@@ -829,6 +827,9 @@ const App = () => {
             boxShadow: isScrolled
               ? "0 4px 10px rgba(0, 0, 0, 0.3)"
               : "none",
+              color: isScrolled
+              ? "rgba(255, 255, 255, 0.9)"
+              : "rgba(241, 0, 0, 0.5)",
           }}
           transition={{ duration: 0.3 }}
           style={{
@@ -874,7 +875,9 @@ const App = () => {
                   style={{ display: "inline-block", cursor: "pointer" }}
                   onClick={() => setCurrentPage(item)}
                 >
-                  <Menu.Item key={item} style={{ fontSize: "18px", fontWeight: "bold", color: currentPage === item ? "rgb(255, 255, 255)" : "black" }}>
+                  <Menu.Item key={item} style={{ fontSize: "18px", fontWeight: "bold", color: currentPage === item ? "rgb(255, 255, 255)" :isScrolled
+                ? "rgba(200, 200, 200, 0.9)"
+                : "rgba(0, 0, 0, 0.99)", }}>
                     {item.charAt(0).toUpperCase() + item.slice(1)}
                   </Menu.Item>
                 </motion.div>
@@ -893,7 +896,10 @@ const App = () => {
               onClick={toggleDrawer}
               style={{
                 fontSize: "24px",
-                color: "white",
+                // color: "white",
+                color: isScrolled
+                ? "rgba(0, 8, 255, 0.9)"
+                : "rgba(241, 0, 0, 0.5)",
                 cursor: "pointer",
                 display: "none",
               }}
@@ -921,7 +927,7 @@ const App = () => {
                   }}
                   onClick={() => { setCurrentPage(item); toggleDrawer() }}
                 >
-                  <Menu.Item key={item} style={{ fontSize: "18px", fontWeight: "bold", backgroundColor: currentPage === item ? "rgba(255, 255, 255, 0.2)" : "transparent", color: currentPage === item ? "rgba(100, 105, 125, 0.88)" : "black" }}>
+                  <Menu.Item key={item} style={{ fontSize: "18px", fontWeight: "bold", backgroundColor: currentPage === item ? "rgba(255, 255, 255, 0.2)" : "transparent", color: currentPage === item ? "rgba(100, 105, 125, 0.88)" : "" }}>
                     {item.charAt(0).toUpperCase() + item.slice(1)}
                   </Menu.Item>
                 </motion.div>
