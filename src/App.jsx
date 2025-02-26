@@ -467,10 +467,17 @@ const projects = [
     challenges: "Ensuring smooth animations and optimizing performance."
   },
   {
-    name: "Dynamic Dashboard",
-    image: "/static/images/dynamic-dashboard.jpg",
+    name: "Simon Gamee",
+    image: "game.png",
     url: "https://neon-lebkuchen-9e77bf.netlify.app/",
-    technologies: "React, Redux, Chart.js",
+    technologies: "ES6, CSS3, HTML5",
+    challenges: "Ensuring smooth animations and optimizing performance."
+  },
+  {
+    name: "Calculator App",
+    image: "/images/cal.png",
+    url: "https://chipper-caramel-66d098.netlify.app/",
+    technologies: "Javascript, CSS3, HTML5",
     challenges: "Managing state efficiently and rendering large data sets."
   },
   {
@@ -533,7 +540,20 @@ const ProjectsPage = () => {
                     textAlign: "center",
                     transition: "background 0.3s ease-in-out",
                   }}
-                  cover={<img src={project.image} alt={project.name} style={{ padding: "20px" }} />}
+                  // cover={<img src={project.image} alt={project.name} style={{ padding: "20px" }} />}
+                  cover={
+                    <img
+                      src={project.image}
+                      alt={project.name}
+                      style={{
+                        width: "100%",        // Make the image fill the width of the Card
+                        height: "200px",      // Set a fixed height for the image
+                        objectFit: "cover",   // Ensure the image covers the area without distorting
+                        padding: "20px",      // Optional, you can adjust this if needed
+                      }}
+                    />
+                  }
+                
                 >
                   <p style={{ fontSize: "16px", lineHeight: "1.6" }}>
                     This project showcases advanced features and high usability.
