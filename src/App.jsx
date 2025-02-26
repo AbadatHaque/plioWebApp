@@ -461,7 +461,7 @@ const cardVariants = {
 const projects = [
   {
     name: "React Portfolio",
-    image: "game.png",
+    image: "/images/portfolio.png",
     url: "https://neon-lebkuchen-9e77bf.netlify.app/",
     technologies: "React, Ant Design, Framer Motion",
     challenges: "Ensuring smooth animations and optimizing performance."
