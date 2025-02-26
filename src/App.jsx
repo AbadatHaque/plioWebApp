@@ -918,8 +918,8 @@ const App = () => {
                 fontSize: "24px",
                 // color: "white",
                 color: isScrolled
-                ? "rgba(0, 8, 255, 0.9)"
-                : "rgba(241, 0, 0, 0.5)",
+                ? "rgba(250, 250, 255, 0.9)"
+                : "rgb(0, 0, 0)",
                 cursor: "pointer",
                 display: "none",
               }}
