@@ -478,22 +478,29 @@ const projects = [
     image: "/images/cal.png",
     url: "https://chipper-caramel-66d098.netlify.app/",
     technologies: "Javascript, CSS3, HTML5",
-    challenges: "Managing state efficiently and rendering large data sets."
+     challenges: "Handling user input validation, managing state without frameworks, parsing complex mathematical expressions, and ensuring the UI remained responsive on both desktop and mobile devices were key challenges. Solutions included manual state management, DOM manipulation, and using vanilla JavaScript to implement an efficient calculation logic."
   },
   {
-    name: "E-commerce Platform",
-    image: "/static/images/ecommerce-platform.jpg",
-    url: "https://neon-lebkuchen-9e77bf.netlify.app/",
-    technologies: "Next.js, Tailwind CSS, Stripe API",
-    challenges: "Handling secure payments and optimizing load speed."
+    name: "Folder Structure System", 
+    image: "/images/folder.png", 
+    url: "https://fileexplorerapp.netlify.app/",
+    technologies: "React.js, Ant Design, Css3, Html5", 
+    challenges: "Managing complex nested folder structures, ensuring mobile-friendly form submissions, and optimizing app performance were key challenges. We overcame these issues by utilizing React hooks effectively, implementing responsive design, and optimizing state updates for large datasets."
   },
-  {
-    name: "AI Chatbot",
-    image: "/static/images/ai-chatbot.jpg",
-    url: "https://neon-lebkuchen-9e77bf.netlify.app/",
-    technologies: "React, OpenAI API, WebSockets",
-    challenges: "Implementing real-time responses and improving NLP accuracy."
-  }
+  // {
+  //   name: "E-commerce Platform",
+  //   image: "/static/images/ecommerce-platform.jpg",
+  //   url: "https://neon-lebkuchen-9e77bf.netlify.app/",
+  //   technologies: "Next.js, Tailwind CSS, Stripe API",
+  //   challenges: "Handling secure payments and optimizing load speed."
+  // },
+  // {
+  //   name: "AI Chatbot",
+  //   image: "/static/images/ai-chatbot.jpg",
+  //   url: "https://neon-lebkuchen-9e77bf.netlify.app/",
+  //   technologies: "React, OpenAI API, WebSockets",
+  //   challenges: "Implementing real-time responses and improving NLP accuracy."
+  // }
 ];
 
 const ProjectsPage = () => {
