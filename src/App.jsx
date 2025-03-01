@@ -34,7 +34,7 @@ import {
 const { Title } = Typography;
 import avatar from '../public/avatar.png'
 import profileImage from "../public/static/profile.jpg";
-
+import resume from '../public/static/abadat_resume.pdf'
 
 
 const { Header, Content, Footer } = Layout;
@@ -95,11 +95,13 @@ const Home = () => {
             icon={<TiSocialLinkedinCircular />}
             onClick={() => window.open("https://www.linkedin.com/in/sk-abadat-haque-a1516b179/", "_blank")}
           />
-          <Button shape="circle" icon={<FaSquareXTwitter />} />
+          <Button
+           onClick={() => window.open("https://x.com/Abadat07", "_blank")}
+           shape="circle" icon={<FaSquareXTwitter />} />
         </motion.div>
         <Button
           type="primary"
-          onClick={() => window.open("/static/abadat_resume.pdf", "_blank")}
+          onClick={() => window.open(resume, "_blank")}
           id="viewResume"
         >
           View Resume
