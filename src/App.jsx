@@ -34,7 +34,8 @@ import {
 const { Title } = Typography;
 import avatar from '../public/avatar.png'
 import profileImage from "../public/static/profile.jpg";
-import resume from '../public/static/abadat_resume.pdf'
+import resume from '../public/static/Abadat_Haque_Frontend_Developer_Resume.pdf'
+import Services from "./service";
 
 
 const { Header, Content, Footer } = Layout;
@@ -158,9 +159,9 @@ const About = () => {
   const journeyData = [
     {
       title: "Frontend Developer",
-      company: "Core Ventum",
-      smallDesc: "Front-end developer at Core Ventum, building a SaaS platform with React JS and Ant Design.", // Small screen description
-      fullDesc: "As a Front-end Developer at Core Ventum, a rapidly growing SaaS startup, I play a critical role in building and enhancing the user interface of our platform. Working closely with the company owner and other key stakeholders, I actively participate in defining the product’s features, design decisions, and user experience improvements. The platform is built with React JS, Ant Design, HTML5, and CSS3, and I work on creating responsive, intuitive, and visually appealing interfaces. My contributions extend beyond just coding – I collaborate on brainstorming sessions, offer insights on user-centric design, and ensure the platform remains scalable and easy to maintain. This hands-on involvement in the startup's growth allows me to directly impact the direction and success of the product while staying up-to-date with the latest front-end technologies.", // Full screen description
+      company: "Connectcosmic Networks Pvt Ltd",
+      smallDesc: "Front-end developer at Connectcosmic Networks Pvt Ltd, building a SaaS platform with React JS and Ant Design.", // Small screen description
+      fullDesc: "As a Front-end Developer at Connectcosmic Networks Pvt Ltd, a rapidly growing SaaS startup, I play a critical role in building and enhancing the user interface of our platform. Working closely with the company owner and other key stakeholders, I actively participate in defining the product’s features, design decisions, and user experience improvements. The platform is built with React JS, Ant Design, HTML5, and CSS3, and I work on creating responsive, intuitive, and visually appealing interfaces. My contributions extend beyond just coding – I collaborate on brainstorming sessions, offer insights on user-centric design, and ensure the platform remains scalable and easy to maintain. This hands-on involvement in the startup's growth allows me to directly impact the direction and success of the product while staying up-to-date with the latest front-end technologies.", // Full screen description
       time: "2024 - Present",
       color: "default",
       location: 'New Delhi'
@@ -817,11 +818,13 @@ const App = () => {
         return <ContactForm />;
       case "skill":
         return <SkillPage />;
+        case "service":
+          // return <Services/>;
       default:
         return <Home />;
     }
   };
-
+  
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
 
@@ -895,7 +898,7 @@ const App = () => {
                 gap: "30px",
               }}
             >
-              {["home", "about", "projects", "contact", "skill"].map((item) => (
+              {["home","service", "about", "projects", "contact", "skill"].map((item) => (
                 <motion.div
                   key={item}
                   whileHover={{ scale: 1.2, background: "rgba(255, 255, 255, 0.1)", borderRadius: "8px", padding: "5px 15px" }}
@@ -938,7 +941,7 @@ const App = () => {
           {/* Mobile Drawer Menu */}
           <Drawer title="Menu" placement="right" onClose={toggleDrawer} open={isDrawerOpen}>
             <Menu theme="light" mode="vertical">
-              {["home", "about", "projects", "contact", "skill"].map((item) => (
+              {["home","service", "about", "projects", "contact", "skill"].map((item) => (
 
                 <motion.div
                   key={item}
