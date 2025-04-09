@@ -34,7 +34,8 @@ import {
 const { Title } = Typography;
 import avatar from '../public/avatar.png'
 import profileImage from "../public/static/profile.jpg";
-import resume from '../public/static/Abadat_Haque_Frontend_Developer_Resume.pdf'
+// import resume from '../public/static/Abadat_Haque_Frontend_Developer_Resume.pdf'
+import resume from '/static/Abadat_Haque_Frontend_Developer_Resume.pdf';
 import Services from "./service";
 
 
