@@ -1,21 +1,24 @@
-import { defineConfig } from 'vite';
-import react from '@vitejs/plugin-react-swc';
-import { VitePWA } from 'vite-plugin-pwa';
-import tailwindcss from '@tailwindcss/vite'
-
+import { defineConfig } from "vite";
+import react from "@vitejs/plugin-react-swc";
+import { VitePWA } from "vite-plugin-pwa";
+import tailwindcss from "@tailwindcss/vite";
+import { visualizer } from "rollup-plugin-visualizer";
 
 // https://vite.dev/config/
 export default defineConfig({
-  plugins: [react(),tailwindcss(),
+  plugins: [
+    react(),
+    tailwindcss(),
+    visualizer({ open: true }),
     VitePWA({
-      registerType: 'autoUpdate',
+      registerType: "autoUpdate",
       workbox: {
         runtimeCaching: [
           {
-            urlPattern: ({ request }) => request.mode === 'navigate', // Cache all pages
-            handler: 'NetworkFirst',
+            urlPattern: ({ request }) => request.mode === "navigate", // Cache all pages
+            handler: "NetworkFirst",
             options: {
-              cacheName: 'page-cache',
+              cacheName: "page-cache",
               expiration: {
                 maxEntries: 50,
                 maxAgeSeconds: 60 * 60 * 24, // 1 day
@@ -23,10 +26,10 @@ export default defineConfig({
             },
           },
           {
-            urlPattern: ({ request }) => request.destination === 'image', // Cache images
-            handler: 'CacheFirst',
+            urlPattern: ({ request }) => request.destination === "image", // Cache images
+            handler: "CacheFirst",
             options: {
-              cacheName: 'image-cache',
+              cacheName: "image-cache",
               expiration: {
                 maxEntries: 100,
                 maxAgeSeconds: 60 * 60 * 24 * 7, // 1 week
@@ -34,10 +37,12 @@ export default defineConfig({
             },
           },
           {
-            urlPattern: ({ request }) => request.destination === 'script' || request.destination === 'style', // Cache JS & CSS
-            handler: 'StaleWhileRevalidate',
+            urlPattern: ({ request }) =>
+              request.destination === "script" ||
+              request.destination === "style", // Cache JS & CSS
+            handler: "StaleWhileRevalidate",
             options: {
-              cacheName: 'static-resources',
+              cacheName: "static-resources",
               expiration: {
                 maxEntries: 50,
                 maxAgeSeconds: 60 * 60 * 24 * 30, // 30 days
@@ -45,36 +50,33 @@ export default defineConfig({
             },
           },
         ],
-        
       },
       manifest: {
-         id: "/",
-        name: 'My PWA App',
-        short_name: 'PWA App',
-        description: 'My awesome PWA with caching',
-        theme_color: '#ffffff',
-        background_color: '#ffffff',
-        display: 'standalone',
+        id: "/",
+        name: "My PWA App",
+        short_name: "PWA App",
+        description: "My awesome PWA with caching",
+        theme_color: "#ffffff",
+        background_color: "#ffffff",
+        display: "standalone",
         start_url: "./",
-        "icons": [
-    {
-      "src": "/icons/icon-192x192.png",
-      "sizes": "192x192",
-      "type": "image/png"
-    },
-    {
-      "src": "/icons/icon-512x512.png",
-      "sizes": "512x512",
-      "type": "image/png"
-    }
-  ]
-      }
-      
-    })
-
+        icons: [
+          {
+            src: "/icons/icon-192x192.png",
+            sizes: "192x192",
+            type: "image/png",
+          },
+          {
+            src: "/icons/icon-512x512.png",
+            sizes: "512x512",
+            type: "image/png",
+          },
+        ],
+      },
+    }),
   ],
   optimizeDeps: {
-    include: ['antd'],
+    include: ["antd"],
   },
   build: {
     rollupOptions: {
