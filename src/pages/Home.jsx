@@ -5,6 +5,7 @@ import { SiGithubactions } from "react-icons/si";
 import { TiSocialLinkedinCircular } from "react-icons/ti";
 import { FaSquareXTwitter } from "react-icons/fa6";
 import avatar from "../assets/avatar.webp";
+import { TypeAnimation } from "react-type-animation";
 const resumeUrl = "../../Abadat_Haque_Frontend_Developer_Resume.pdf";
 
 const Home = () => {
