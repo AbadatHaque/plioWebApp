@@ -101,15 +101,14 @@ const Home = () => {
             aria-label="Twitter Profile"
           />
         </motion.div>
-        <a href="/Abadat_Haque_Frontend_Developer_Resume.pdf" download>
-          <Button
-            type="primary"
-            // onClick={() =>
-            //   window.open(resumeUrl, "_blank", "noopener noreferrer")
-            // }
-            id="viewResume"
-            aria-label="View Resume PDF"
-          >
+        <a
+          href="/Abadat_Haque_Frontend_Developer_Resume.pdf"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="View Abadat Haque's Resume in a new browser tab"
+          role="link"
+        >
+          <Button type="primary" id="viewResume" aria-label="View Resume PDF">
             View Resume
           </Button>
         </a>
