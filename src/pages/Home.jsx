@@ -101,17 +101,18 @@ const Home = () => {
             aria-label="Twitter Profile"
           />
         </motion.div>
-
-        <Button
-          type="primary"
-          onClick={() =>
-            window.open(resumeUrl, "_blank", "noopener noreferrer")
-          }
-          id="viewResume"
-          aria-label="View Resume PDF"
-        >
-          View Resume
-        </Button>
+        <a href="/Abadat_Haque_Frontend_Developer_Resume.pdf" download>
+          <Button
+            type="primary"
+            // onClick={() =>
+            //   window.open(resumeUrl, "_blank", "noopener noreferrer")
+            // }
+            id="viewResume"
+            aria-label="View Resume PDF"
+          >
+            View Resume
+          </Button>
+        </a>
       </motion.div>
 
       <motion.div

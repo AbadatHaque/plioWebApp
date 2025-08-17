@@ -244,7 +244,7 @@ const App = () => {
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
         transition={{ duration: 0.8 }}
-        style={{ paddingTop: "80px" }}
+        style={{ paddingTop: "80px", height: "100vh" }}
       >
         <Content
           style={{
@@ -264,6 +264,9 @@ const App = () => {
           color: "white",
           padding: "20px",
           transition: "all 0.3s ease-in-out",
+          position: "fixed",
+          bottom: "0",
+          width: "100%",
         }}
       >
         <motion.div whileHover={{ textShadow: "0px 0px 8px white" }}>
