@@ -17,6 +17,9 @@ const About = lazy(() => import("./pages/About"));
 const ProjectsPage = lazy(() => import("./pages/ProjectsPage"));
 const ContactForm = lazy(() => import("./pages/ContactForm"));
 const SkillPage = lazy(() => import("./pages/SkillPage"));
+const Blog = lazy(() => import("./pages/Blog"));
+const Services = lazy(() => import("./service"));
+
 //          <Suspense fallback={<div>Loading...</div>}>{renderPage()}</Suspense>
 
 const { Content, Footer } = Layout;
@@ -35,7 +38,9 @@ const App = () => {
       case "skill":
         return <SkillPage />;
       case "service":
-      // return <Services/>;
+        return <Services />;
+      case "blog":
+        return <Blog />;
       default:
         return <Home />;
     }
@@ -112,39 +117,45 @@ const App = () => {
                 gap: "30px",
               }}
             >
-              {["home", "service", "about", "projects", "contact", "skill"].map(
-                (item) => (
-                  <motion.div
+              {[
+                "home",
+                "service",
+                "about",
+                "projects",
+                "contact",
+                "skill",
+                "blog",
+              ].map((item) => (
+                <motion.div
+                  key={item}
+                  whileHover={{
+                    scale: 1.2,
+                    background: "rgba(255, 255, 255, 0.1)",
+                    borderRadius: "8px",
+                    padding: "5px 15px",
+                  }}
+                  whileTap={{ scale: 0.9 }}
+                  transition={{ duration: 0.3 }}
+                  style={{ display: "inline-block", cursor: "pointer" }}
+                  onClick={() => setCurrentPage(item)}
+                >
+                  <Menu.Item
                     key={item}
-                    whileHover={{
-                      scale: 1.2,
-                      background: "rgba(255, 255, 255, 0.1)",
-                      borderRadius: "8px",
-                      padding: "5px 15px",
+                    style={{
+                      fontSize: "18px",
+                      fontWeight: "bold",
+                      color:
+                        currentPage === item
+                          ? "rgb(255, 255, 255)"
+                          : isScrolled
+                          ? "rgba(200, 200, 200, 0.9)"
+                          : "rgba(0, 0, 0, 0.99)",
                     }}
-                    whileTap={{ scale: 0.9 }}
-                    transition={{ duration: 0.3 }}
-                    style={{ display: "inline-block", cursor: "pointer" }}
-                    onClick={() => setCurrentPage(item)}
                   >
-                    <Menu.Item
-                      key={item}
-                      style={{
-                        fontSize: "18px",
-                        fontWeight: "bold",
-                        color:
-                          currentPage === item
-                            ? "rgb(255, 255, 255)"
-                            : isScrolled
-                            ? "rgba(200, 200, 200, 0.9)"
-                            : "rgba(0, 0, 0, 0.99)",
-                      }}
-                    >
-                      {item.charAt(0).toUpperCase() + item.slice(1)}
-                    </Menu.Item>
-                  </motion.div>
-                )
-              )}
+                    {item.charAt(0).toUpperCase() + item.slice(1)}
+                  </Menu.Item>
+                </motion.div>
+              ))}
             </Menu>
           </motion.div>
 
@@ -175,62 +186,66 @@ const App = () => {
             open={isDrawerOpen}
           >
             <Menu theme="light" mode="vertical">
-              {["home", "service", "about", "projects", "contact", "skill"].map(
-                (item) => (
-                  <motion.div
-                    key={item}
-                    whileHover={{
-                      scale: 1.2,
-                      background: "rgba(255, 255, 255, 0.1)",
-                      borderRadius: "8px",
-                      padding: "5px 15px",
-                    }}
-                    whileTap={{ scale: 0.9 }}
-                    transition={{ duration: 0.3 }}
-                    // style={{  cursor: "pointer" }}
-                    background={
+              {[
+                "home",
+                "service",
+                "about",
+                "projects",
+                "contact",
+                "skill",
+                "blog",
+              ].map((item) => (
+                <motion.div
+                  key={item}
+                  whileHover={{
+                    scale: 1.2,
+                    background: "rgba(255, 255, 255, 0.1)",
+                    borderRadius: "8px",
+                    padding: "5px 15px",
+                  }}
+                  whileTap={{ scale: 0.9 }}
+                  transition={{ duration: 0.3 }}
+                  // style={{  cursor: "pointer" }}
+                  background={
+                    currentPage === item
+                      ? "rgba(255, 255, 255, 0.2)"
+                      : "transparent"
+                  } //
+                  style={{
+                    cursor: "pointer",
+                    backgroundColor:
                       currentPage === item
                         ? "rgba(255, 255, 255, 0.2)"
-                        : "transparent"
-                    } //
+                        : "transparent", // Active item background
+                    borderRadius: "8px",
+                    padding: "8px 15px",
+                    transition: "background 0.3s ease",
+                  }}
+                  onClick={() => {
+                    setCurrentPage(item);
+                    toggleDrawer();
+                  }}
+                >
+                  <Menu.Item
+                    key={item}
                     style={{
-                      cursor: "pointer",
+                      fontSize: "18px",
+                      fontWeight: "bold",
                       backgroundColor:
                         currentPage === item
                           ? "rgba(255, 255, 255, 0.2)"
-                          : "transparent", // Active item background
-                      borderRadius: "8px",
-                      padding: "8px 15px",
-                      transition: "background 0.3s ease",
-                    }}
-                    onClick={() => {
-                      setCurrentPage(item);
-                      toggleDrawer();
+                          : "transparent",
+                      color:
+                        currentPage === item ? "rgba(100, 105, 125, 0.88)" : "",
                     }}
                   >
-                    <Menu.Item
-                      key={item}
-                      style={{
-                        fontSize: "18px",
-                        fontWeight: "bold",
-                        backgroundColor:
-                          currentPage === item
-                            ? "rgba(255, 255, 255, 0.2)"
-                            : "transparent",
-                        color:
-                          currentPage === item
-                            ? "rgba(100, 105, 125, 0.88)"
-                            : "",
-                      }}
-                    >
-                      {item.charAt(0).toUpperCase() + item.slice(1)}
-                    </Menu.Item>
-                  </motion.div>
-                  //     ))}
-                  //   </Menu>
-                  // </motion.div>
-                )
-              )}
+                    {item.charAt(0).toUpperCase() + item.slice(1)}
+                  </Menu.Item>
+                </motion.div>
+                //     ))}
+                //   </Menu>
+                // </motion.div>
+              ))}
             </Menu>
             {/* // <Menu.Item key={item} onClick={toggleDrawer}>
             //   {item.charAt(0).toUpperCase() + item.slice(1)}
@@ -267,6 +282,7 @@ const App = () => {
           position: "fixed",
           bottom: "0",
           width: "100%",
+          zIndex: "99999",
         }}
       >
         <motion.div whileHover={{ textShadow: "0px 0px 8px white" }}>

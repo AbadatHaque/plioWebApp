@@ -215,7 +215,7 @@ export const About = () => {
                           transition={{ duration: 0.3 }}
                           onClick={() => showModal(item)} // Show full details on click
                         >
-                          <FullscreenOutlined style={{ fontSize: "18px" }} />
+                          <FullscreenOutlined style={{ fontSize: "12px" }} />
                         </motion.button>
                         {/* Media Query Adjustments for Mobile Devices */}
                         <style>
