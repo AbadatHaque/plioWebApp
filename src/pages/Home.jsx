@@ -107,6 +107,7 @@ const Home = () => {
           rel="noopener noreferrer"
           aria-label="View Abadat Haque's Resume in a new browser tab"
           role="link"
+          download
         >
           <Button type="primary" id="viewResume" aria-label="View Resume PDF">
             View Resume
