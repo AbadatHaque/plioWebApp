@@ -1,133 +1,130 @@
-import { Button } from "antd";
 import { motion } from "framer-motion";
-
+import { TypeAnimation } from "react-type-animation";
 import { SiGithubactions } from "react-icons/si";
 import { TiSocialLinkedinCircular } from "react-icons/ti";
 import { FaSquareXTwitter } from "react-icons/fa6";
 import avatar from "../assets/avatar.webp";
-import { TypeAnimation } from "react-type-animation";
-const resumeUrl = "/Abadat_Haque_Frontend_Developer_Resume.pdf";
 
 const Home = () => {
   return (
     <motion.div
-      className="containar"
+      className="home-container"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      transition={{ duration: 1 }}
-      // Use landmark role for main content
+      transition={{ duration: 0.6 }}
       role="main"
       aria-label="Home section"
     >
+      {/* ── Left Side ────────────────────────────────────── */}
       <motion.div
-        className="lhs"
-        initial={{ x: -100 }}
-        animate={{ x: 0 }}
-        transition={{ duration: 0.8 }}
+        className="home-lhs"
+        initial={{ x: -40, opacity: 0 }}
+        animate={{ x: 0, opacity: 1 }}
+        transition={{ duration: 0.6, delay: 0.1 }}
       >
-        <header className="headingTex">
-          <h5 className="color-custom-grey font-weight-bold mb-0">Hey!</h5>
-          <h1 className="color-name-blue text-boldest">{"I'm ABADAT"}</h1>
+        {/* Gold greeting line */}
+        <p className="home-greeting">Welcome to my portfolio</p>
 
-          {/* Type animation for roles with aria-live to announce changes */}
+        {/* Big serif name */}
+        <h1 className="home-name">I'm ABADAT</h1>
+
+        {/* Italic typed role */}
+        <div className="home-type">
           <TypeAnimation
             sequence={[
-              "I am a Frontend Developer.",
-              1000,
-              "I am a React JS Developer.",
-              1000,
-              "I am a Web App Developer.",
-              1000,
-              "I am a Fullstack Developer.",
-              1000,
+              "Frontend Developer.", 1200,
+              "React JS Specialist.", 1200,
+              "Web App Developer.", 1200,
+              "Fullstack Developer.", 1200,
             ]}
             wrapper="span"
-            speed={50}
-            style={{ fontSize: "1.5rem", display: "block" }}
+            speed={55}
             repeat={Infinity}
             aria-live="polite"
-            aria-atomic="true"
-            aria-relevant="text"
           />
-        </header>
+        </div>
 
-        <p style={{ margin: "0 0 2rem" }} className="color-custom-grey h5">
-          I specialize in developing pixel-perfect user interfaces
+        {/* Gold rule */}
+        <div className="home-divider" />
+
+        {/* Bio */}
+        <p className="home-bio">
+          I specialise in crafting pixel-perfect, high-performance user
+          interfaces with React.js, TypeScript, and modern frontend tooling —
+          3.5+ years of professional experience across SaaS products and
+          global clients in USA, Ireland &amp; Bangladesh.
         </p>
 
-        <motion.div
-          className="socialMediaButtons"
-          initial={{ scale: 0.8 }}
-          animate={{ scale: 1 }}
-          transition={{ duration: 0.5 }}
-          role="navigation"
-          aria-label="Social media links"
-        >
-          {/* Buttons with aria-label for screen readers */}
-          <Button
-            shape="circle"
-            icon={<SiGithubactions />}
-            onClick={() =>
-              window.open(
-                "https://github.com/AbadatHaque",
-                "_blank",
-                "noopener noreferrer"
-              )
-            }
+        {/* Social icons */}
+        <nav className="home-social" aria-label="Social media links">
+          <motion.a
+            href="https://github.com/AbadatHaque"
+            target="_blank" rel="noopener noreferrer"
             aria-label="GitHub Profile"
-          />
-          <Button
-            shape="circle"
-            icon={<TiSocialLinkedinCircular />}
-            onClick={() =>
-              window.open(
-                "https://www.linkedin.com/in/sk-abadat-haque-a1516b179/",
-                "_blank",
-                "noopener noreferrer"
-              )
-            }
+            whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}
+          >
+            <SiGithubactions />
+          </motion.a>
+          <motion.a
+            href="https://www.linkedin.com/in/sk-abadat-haque-a1516b179/"
+            target="_blank" rel="noopener noreferrer"
             aria-label="LinkedIn Profile"
-          />
-          <Button
-            shape="circle"
-            icon={<FaSquareXTwitter />}
-            onClick={() =>
-              window.open(
-                "https://x.com/Abadat07",
-                "_blank",
-                "noopener noreferrer"
-              )
-            }
-            aria-label="Twitter Profile"
-          />
-        </motion.div>
-        <a
-          href="/Abadat_Haque_Frontend_Developer_Resume.pdf"
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label="View Abadat Haque's Resume in a new browser tab"
-          role="link"
-          download
+            whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}
+          >
+            <TiSocialLinkedinCircular />
+          </motion.a>
+          <motion.a
+            href="https://x.com/Abadat07"
+            target="_blank" rel="noopener noreferrer"
+            aria-label="X / Twitter Profile"
+            whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}
+          >
+            <FaSquareXTwitter />
+          </motion.a>
+        </nav>
+
+        {/* CTA buttons */}
+        <motion.div
+          className="home-cta"
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.4 }}
         >
-          <Button type="primary" id="viewResume" aria-label="View Resume PDF">
+          <a
+            href="/Abadat_Haque_Frontend_Developer_Resume.pdf"
+            target="_blank" rel="noopener noreferrer"
+            download
+            className="btn-classic"
+          >
+            Download CV
+          </a>
+          <a
+            href="/Abadat_Haque_Frontend_Developer_Resume.pdf"
+            target="_blank" rel="noopener noreferrer"
+            className="btn-classic-outline"
+          >
             View Resume
-          </Button>
-        </a>
+          </a>
+        </motion.div>
       </motion.div>
 
+      {/* ── Right Side – Avatar ───────────────────────────── */}
       <motion.div
-        className="rhs"
-        initial={{ x: 100 }}
-        animate={{ x: 0 }}
-        transition={{ duration: 0.8 }}
+        className="home-rhs"
+        initial={{ x: 40, opacity: 0 }}
+        animate={{ x: 0, opacity: 1 }}
+        transition={{ duration: 0.6, delay: 0.2 }}
       >
-        <img
-          className="homepageavtar"
-          style={{ maxWidth: "100%" }}
-          alt="Abadat Haque coding at computer"
-          src={avatar}
-          role="img"
-        />
+        <div className="home-avatar-wrapper">
+          <div className="home-avatar-ring">
+            <img src={avatar} alt="Abadat Haque – Frontend Developer" />
+          </div>
+          <motion.span
+            className="home-gold-dot"
+            animate={{ scale: [1, 1.3, 1] }}
+            transition={{ repeat: Infinity, duration: 2.6, ease: "easeInOut" }}
+          />
+        </div>
       </motion.div>
     </motion.div>
   );
