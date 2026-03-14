@@ -140,6 +140,7 @@ const About = () => {
           <img
             className="profile-avatar"
             src={profileImage}
+            loading="lazy"
             alt="SK Abadat Haque"
             style={{ width: 160, height: 160, borderRadius: "50%", border: "4px solid var(--navy)", objectFit: "cover", objectPosition: "top", margin: "0 auto 1.2rem", display: "block" }}
           />

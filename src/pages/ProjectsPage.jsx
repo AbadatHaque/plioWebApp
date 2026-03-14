@@ -5,6 +5,14 @@ import { FullscreenOutlined, LinkOutlined } from "@ant-design/icons";
 
 const projects = [
   {
+    name: "Money Trackify",
+    image: "https://money-trackify.netlify.app/icon.png",
+    url: "https://money-trackify.netlify.app/",
+    technologies: ["Next.js", "React", "Tailwind CSS", "PWA", "Node.js", "Mongoose"],
+    challenges:
+      "Implementing responsive financial charts, ensuring seamless PWA offline-first experience, and managing real-time data for savings goals and expense tracking.",
+  },
+  {
     name: "React Portfolio",
     image: "/images/portfolio.png",
     url: "https://neon-lebkuchen-9e77bf.netlify.app/",
@@ -44,14 +52,7 @@ const projects = [
     challenges:
       "Seamless cart & checkout flows, lazy-loaded image-heavy pages, and secure payment integration with fast load times.",
   },
-  {
-    name: "Money Trackify",
-    image: "https://money-trackify.netlify.app/icon.png",
-    url: "https://money-trackify.netlify.app/",
-    technologies: ["Next.js", "React", "Tailwind CSS", "PWA"],
-    challenges:
-      "Implementing responsive financial charts, ensuring seamless PWA offline-first experience, and managing real-time data for savings goals and expense tracking.",
-  },
+
 ];
 
 const ProjectsPage = () => {
