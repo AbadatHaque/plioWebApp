@@ -55,7 +55,12 @@ const MoonIcon = () => (
 
 /* ═══════════════════════════════════════════════════════════ */
 const App = () => {
-  const [currentPage, setCurrentPage] = useState("home");
+  // Read current URL path to set initial page, default to 'home'
+  const [currentPage, setCurrentPage] = useState(() => {
+    const path = window.location.pathname.replace("/", "") || "home";
+    return NAV_ITEMS.some(item => item.key === path) ? path : "home";
+  });
+
   const [isScrolled, setIsScrolled] = useState(false);
   const [drawerOpen, setDrawerOpen] = useState(false);
 
@@ -79,10 +84,26 @@ const App = () => {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  /* Handle browser back/forward buttons */
+  useEffect(() => {
+    const handlePopState = () => {
+      const path = window.location.pathname.replace("/", "") || "home";
+      setCurrentPage(NAV_ITEMS.some(item => item.key === path) ? path : "home");
+    };
+    window.addEventListener("popstate", handlePopState);
+    return () => window.removeEventListener("popstate", handlePopState);
+  }, []);
+
   /* Scroll to top on page change */
   useEffect(() => { window.scrollTo({ top: 0, behavior: "smooth" }); }, [currentPage]);
 
-  const navigate = (page) => { setCurrentPage(page); setDrawerOpen(false); };
+  const navigate = (page) => {
+    setCurrentPage(page);
+    setDrawerOpen(false);
+    // Update URL without full page reload
+    window.history.pushState(null, "", `/${page === "home" ? "" : page}`);
+  };
+
   const toggleDark = () => setDark(d => !d);
 
   const renderPage = () => {
