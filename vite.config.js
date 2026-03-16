@@ -75,7 +75,7 @@ export default defineConfig({
       },
     }),
   ],
-   base: "/plioWebApp/",
+   base: "/",
   optimizeDeps: {
     include: ["antd"],
   },
